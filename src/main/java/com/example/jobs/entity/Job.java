@@ -22,6 +22,7 @@ public class Job {
     private int id;
     private String name;
     private String description;
+    @Enumerated(EnumType.STRING)
     private JobType jobType;
     private double salary;
 
