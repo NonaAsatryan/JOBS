@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -47,23 +47,23 @@
             <a class="navbar-brand" href="index.html"><img class="img-fluid" src="/images/logo.png" alt="Logo"></a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="nav navbar-nav">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="/">Home</a></li>
                     <li><a href="job-list.html">Job list</a></li>
                     <li><a href="details.html">Job Details</a></li>
-                    <li><a href="resume.html">Resume</a></li>
+                    <li><a href="/resume">Resume</a></li>
                     <li class="dropdown active"><a href="javascript:void(0);" class="dropdown-toggle"
                                                    data-toggle="dropdown">Pages<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="profile.html">profile</a></li>
-                            <li><a href="post-resume.html">Post Resume</a></li>
+                            <li><a href="/resume/post">Post Resume</a></li>
                             <li><a href="post.html">Job Post</a></li>
-                            <li><a href="edit-resume.html">Edit Resume</a></li>
+                            <li><a href="/resume/edit">Edit Resume</a></li>
                             <li><a href="profile-details.html">profile Details</a></li>
                             <li><a href="bookmark.html">Bookmark</a></li>
                             <li><a href="applied-job.html">Applied Job</a></li>
                             <li><a href="delete-account.html">Close Account</a></li>
-                            <li class="active"><a href="signup.html">Job Signup</a></li>
-                            <li><a href="/user/signin">Job Signin</a></li>
+                            <li class="active"><a href="/user/register">Job Signup</a></li>
+                            <li><a href="/user/login">Job Signin</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -72,8 +72,8 @@
             <div class="nav-right">
                 <ul class="sign-in">
                     <li><i class="fa fa-user"></i></li>
-                    <li><a href="/user/signin">Sign In</a></li>
-                    <li><a href="/user/signup">Register</a></li>
+                    <li><a href="/user/login">Sign In</a></li>
+                    <li><a href="/user/register">Register</a></li>
                 </ul>
                 <a href="post.html" class="btn">Post Your Job</a>
             </div>
@@ -87,61 +87,57 @@
             <div class="user-account job-user-account">
                 <h2>Create An Account</h2>
                 <ul class="nav nav-tabs text-center" role="tablist">
-                    <li role="presentation"><a class="active" href="/user/register" aria-controls="find-job" role="tab"
-                                               data-toggle="tab">User registration</a></li>
-                    <li role="presentation"><a href="/user/register" aria-controls="post-job" role="tab" data-toggle="tab">Epmloyer
-                        registration</a></li>
+                    <li role="presentation"><a class="active" href="signup.html#find-job" aria-controls="find-job" role="tab" data-toggle="tab">Find A Job</a></li>
+                    <li role="presentation"><a href="signup.html#post-job" aria-controls="post-job" role="tab" data-toggle="tab">Post A Job</a></li>
                 </ul>
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active show" id="find-job">
-                        <form action="/user/register" method="post" enctype="multipart/form-data">
+                        <form action="/user/register" method="post">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Name">
+                                <input type="text" name="name" class="form-control" placeholder="Name">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Surname">
+                                <input type="text" name="surname" class="form-control" placeholder="Surname">
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Email">
+                                <input type="email" name="email" class="form-control" placeholder="Email">
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Password">
+                                <input type="password" name="password" class="form-control" placeholder="Password">
                             </div>
-                            <!--<div class="form-group">-->
-                            <!--<input type="password" class="form-control" placeholder="Confirm Password">-->
-                            <!--</div>-->
-                            <div class="form-group">
-                                <input type="date" class="form-control" placeholder="Date of birth">
-                            </div>
-                            <select class="form-control">
-                                <option value="#">Gender</option>
-                                <option value="#">MALE</option>
-                                <option value="#">FEMALE</option>
-                            </select>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Phone">
-                            </div>
-                            <div class="form-group">
-                                <input type="file" name="resume" class="form-control">
-                            </div>
-                            <select class="form-control">
-                                <option value="#">UserType</option>
-                                <option value="#">USER</option>
-                                <option value="#">EMPLOYER</option>
-                                <option value="#">ADMIN</option>
-                            </select>
-                            <select class="form-control">
-                                <option value="#">Select City</option>
-                                <option value="#">Yerevan</option>
-                                <option value="#">Gyumri</option>
-                                <option value="#">Vanadzor</option>
-                                <option value="#">Artik</option>
-                                <option value="#">Maralik</option>
-                            </select>
 
+<!--                            <div class="form-group">-->
+<!--                                <input type="date" name="dateOfBirth" class="form-control" placeholder="Date of birth">-->
+<!--                            </div>-->
+<!--                            <select class="form-control">-->
+<!--                                <option value="#">Gender</option>-->
+<!--                                <option value="#">MALE</option>-->
+<!--                                <option value="#">FEMALE</option>-->
+<!--                            </select>-->
                             <div class="form-group">
-                                <input type="file" name="picture" class="form-control">
+                                <input type="text" name="phone" class="form-control" placeholder="Phone">
                             </div>
+<!--                            <div class="form-group">-->
+<!--                                <input type="file" name="resume" class="form-control">-->
+<!--                            </div>-->
+<!--                            <select name="userType" class="form-control">-->
+<!--                                <option value="#">UserType</option>-->
+<!--                                <option value="#">USER</option>-->
+<!--                                <option value="#">EMPLOYER</option>-->
+<!--                                <option value="#">ADMIN</option>-->
+<!--                            </select>-->
+<!--                            <select name="city" class="form-control">-->
+<!--                                <option value="#">Select City</option>-->
+<!--                                <option value="#">Yerevan</option>-->
+<!--                                <option value="#">Gyumri</option>-->
+<!--                                <option value="#">Vanadzor</option>-->
+<!--                                <option value="#">Artik</option>-->
+<!--                                <option value="#">Maralik</option>-->
+<!--                            </select>-->
+
+<!--                            <div class="form-group">-->
+<!--                                <input type="file" name="picture" class="form-control">-->
+<!--                            </div>-->
                             <div class="checkbox">
                                 <label class="pull-left checked" for="signing"><input type="checkbox" name="signing"
                                                                                       id="signing"> By signing up for an
@@ -152,7 +148,7 @@
                         </form>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="post-job">
-                        <form action="/user/add">
+                        <form action="signup.html#">
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Employer Name">
                             </div>
@@ -162,9 +158,9 @@
                             <div class="form-group">
                                 <input type="password" class="form-control" placeholder="Password">
                             </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Confirm Password">
-                            </div>
+<!--                            <div class="form-group">-->
+<!--                                <input type="password" class="form-control" placeholder="Confirm Password">-->
+<!--                            </div>-->
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Contact Number">
                             </div>

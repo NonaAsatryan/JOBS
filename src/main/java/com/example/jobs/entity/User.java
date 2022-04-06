@@ -27,7 +27,9 @@ public class User {
     private Gender gender;
     private String phone;
     private String resume;
-    private Usertype usertype;
+    @Enumerated(EnumType.STRING)
+    private UserType userType;
     private String picUrl;
+    private String city;
 
 }

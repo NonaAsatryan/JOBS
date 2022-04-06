@@ -27,51 +27,51 @@ public class IndexController {
         map.addAttribute("categoryList", categoryList);
         return "post";
     }
-
-    @GetMapping("/resume")
-    public String resumePage() {
-        return "resume";
-    }
-
-    @GetMapping("/user/register")
-    public String registerPage() {
-        return "signup";
-    }
-
-    @GetMapping("/user/signin")
-    public String signinPage() {
-        return "signin";
-    }
-
-    @GetMapping("/job/details")
-    public String detailsPage() {
-        return "details";
-    }
-
-    @GetMapping("/job/jobList")
-    public String jobListPage() {
-        return "job-list";
-    }
-
-    @GetMapping("/job/jobDetails")
-    public String jobDetailsPage() {
-        return "job-details";
-    }
-
-    @GetMapping("/resume/post")
-    public String postResumePage() {
-        return "post-resume";
-    }
-
+//
+//    @GetMapping("/resume")
+//    public String resumePage() {
+//        return "resume";
+//    }
+//
+//    @GetMapping("/user/register")
+//    public String registerPage() {
+//        return "signup";
+//    }
+//
+//    @GetMapping("/user/signin")
+//    public String signinPage() {
+//        return "signin";
+//    }
+//
+//    @GetMapping("/job/details")
+//    public String detailsPage() {
+//        return "details";
+//    }
+//
+//    @GetMapping("/job/jobList")
+//    public String jobListPage() {
+//        return "job-list";
+//    }
+//
+//    @GetMapping("/job/jobDetails")
+//    public String jobDetailsPage() {
+//        return "job-details";
+//    }
+//
+//    @GetMapping("/resume/post")
+//    public String postResumePage() {
+//        return "post-resume";
+//    }
+//
     @GetMapping("/user/profile")
     public String userProfilePage() {
         return "profile";
     }
-
-    @GetMapping("/resume/edit")
-    public String editResumePage() {
-        return "edit-resume";
-    }
+//
+//    @GetMapping("/resume/edit")
+//    public String editResumePage() {
+//        return "edit-resume";
+//    }
 
     @GetMapping("/user/profileDetails")
     public String profileDetailsPage() {
