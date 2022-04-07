@@ -13,50 +13,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class IndexController {
 
-    private final CategoryService categoryService;
-
-
     @GetMapping("/")
     public String main() {
         return "index";
     }
 
-    @GetMapping("/job/post")
-    public String postPage(ModelMap map) {
-        List<Category> categoryList = categoryService.findAll();
-        map.addAttribute("categoryList", categoryList);
-        return "post";
-    }
 //
-//    @GetMapping("/resume")
-//    public String resumePage() {
-//        return "resume";
-//    }
 //
-//    @GetMapping("/user/register")
-//    public String registerPage() {
-//        return "signup";
-//    }
 //
-//    @GetMapping("/user/signin")
-//    public String signinPage() {
-//        return "signin";
-//    }
 //
-//    @GetMapping("/job/details")
-//    public String detailsPage() {
-//        return "details";
-//    }
-//
-//    @GetMapping("/job/jobList")
-//    public String jobListPage() {
-//        return "job-list";
-//    }
-//
-//    @GetMapping("/job/jobDetails")
-//    public String jobDetailsPage() {
-//        return "job-details";
-//    }
+
 //
 //    @GetMapping("/resume/post")
 //    public String postResumePage() {
@@ -67,11 +33,7 @@ public class IndexController {
     public String userProfilePage() {
         return "profile";
     }
-//
-//    @GetMapping("/resume/edit")
-//    public String editResumePage() {
-//        return "edit-resume";
-//    }
+
 
     @GetMapping("/user/profileDetails")
     public String profileDetailsPage() {

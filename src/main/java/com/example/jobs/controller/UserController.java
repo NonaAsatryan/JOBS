@@ -2,6 +2,7 @@ package com.example.jobs.controller;
 
 import com.example.jobs.entity.User;
 import com.example.jobs.repository.UserRepository;
+import com.example.jobs.sequrity.CurrentUser;
 import com.example.jobs.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -33,8 +34,9 @@ public class UserController {
         return "signin";
     }
     @PostMapping("/user/login")
-    public String userLogin(@ModelAttribute User user,ModelMap map){
-        map.addAttribute("user",user);
+    public String userLogin(@ModelAttribute CurrentUser currentUser, ModelMap map){
+        map.addAttribute("currentUser",currentUser);
+        userService.login(currentUser.getUser());
         return "redirect:/user/profile";
     }
 //    @GetMapping("/user/profile")
