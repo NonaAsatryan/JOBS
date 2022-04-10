@@ -25,6 +25,7 @@ public class Resume {
     private String qualifications;
     private String languageProficiency;
     private String awards;
+    private String picUrl;
 
     @ManyToOne
     private User user;
