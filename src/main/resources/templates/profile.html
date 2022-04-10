@@ -241,11 +241,11 @@
             <a href="/profile" class="btn cancle">Cancle</a>
         </div>
         <div class="download-button resume">
-                <img type="file" th:if="${currentUser.user.resume!=null}" th:src="@{/getFile(fileName=${currentUser.user.resume})}" width="100"/>
-                <a th:if="${currentUser.user.resume==null}" href="/resume/post">
+            <img type="file" th:if="${currentUser.user.resume!=null}" th:src="@{/getFile(fileName=${currentUser.user.resume})}" width="100"/>
+            <a th:if="${currentUser.user.resume==null}" href="/resume/post">
 
-            <a href="/getFile" class="btn">Download
-                Resume as doc</a>
+                <a href="/getFile" class="btn">Download
+                    Resume as doc</a>
         </div>
     </div>
     </div>

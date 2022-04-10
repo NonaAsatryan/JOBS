@@ -92,7 +92,7 @@
                 </ul>
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active show" id="find-job">
-                        <form action="/user/register" method="post">
+                        <form action="/user/register" method="post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <input type="text" name="name" class="form-control" placeholder="Name">
                             </div>
@@ -106,38 +106,40 @@
                                 <input type="password" name="password" class="form-control" placeholder="Password">
                             </div>
 
-<!--                            <div class="form-group">-->
-<!--                                <input type="date" name="dateOfBirth" class="form-control" placeholder="Date of birth">-->
-<!--                            </div>-->
-<!--                            <select class="form-control">-->
-<!--                                <option value="#">Gender</option>-->
-<!--                                <option value="#">MALE</option>-->
-<!--                                <option value="#">FEMALE</option>-->
-<!--                            </select>-->
+                            <div class="form-group">
+                                <input type="date" name="dateOfBirth" class="form-control" placeholder="Date of birth">
+                            </div>
+                            <select name="gender" class="form-control">
+                                <option value="#">Gender</option>
+                                <option value="MALE">MALE</option>
+                                <option value="FEMALE">FEMALE</option>
+                            </select>
                             <div class="form-group">
                                 <input type="text" name="phone" class="form-control" placeholder="Phone">
                             </div>
-<!--                            <div class="form-group">-->
-<!--                                <input type="file" name="resume" class="form-control">-->
-<!--                            </div>-->
-<!--                            <select name="userType" class="form-control">-->
-<!--                                <option value="#">UserType</option>-->
-<!--                                <option value="#">USER</option>-->
-<!--                                <option value="#">EMPLOYER</option>-->
-<!--                                <option value="#">ADMIN</option>-->
-<!--                            </select>-->
-<!--                            <select name="city" class="form-control">-->
-<!--                                <option value="#">Select City</option>-->
-<!--                                <option value="#">Yerevan</option>-->
-<!--                                <option value="#">Gyumri</option>-->
-<!--                                <option value="#">Vanadzor</option>-->
-<!--                                <option value="#">Artik</option>-->
-<!--                                <option value="#">Maralik</option>-->
-<!--                            </select>-->
+                            <div class="form-group">
+                                <input type="file" name="fileName" class="form-control" placeholder="Download your resume">
 
-<!--                            <div class="form-group">-->
-<!--                                <input type="file" name="picture" class="form-control">-->
-<!--                            </div>-->
+                            </div>
+                            <select name="userType" class="form-control">
+                                <option value="#">UserType</option>
+                                <option value="USER">USER</option>
+                                <option value="EMPLOYER">EMPLOYER</option>
+                                <!--                                <option value="#">ADMIN</option>-->
+                            </select>
+                            <select name="city" class="form-control">
+                                <option value="#">Select City</option>
+                                <option value="Yerevan">Yerevan</option>
+                                <option value="Gyumri">Gyumri</option>
+                                <option value="Vanadzor">Vanadzor</option>
+                                <option value="Artik">Artik</option>
+                                <option value="Maralik">Maralik</option>
+                            </select>
+
+                            <div class="form-group">
+                                <input type="file" name="picName" class="form-control">
+                                Download Photo
+                            </div>
                             <div class="checkbox">
                                 <label class="pull-left checked" for="signing"><input type="checkbox" name="signing"
                                                                                       id="signing"> By signing up for an
@@ -158,9 +160,9 @@
                             <div class="form-group">
                                 <input type="password" class="form-control" placeholder="Password">
                             </div>
-<!--                            <div class="form-group">-->
-<!--                                <input type="password" class="form-control" placeholder="Confirm Password">-->
-<!--                            </div>-->
+                            <!--                            <div class="form-group">-->
+                            <!--                                <input type="password" class="form-control" placeholder="Confirm Password">-->
+                            <!--                            </div>-->
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Contact Number">
                             </div>
