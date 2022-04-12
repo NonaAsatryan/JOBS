@@ -34,4 +34,6 @@ public class CompanyService {
     public Optional<Company> findById(int id){
         return companyRepository.findById(id);
     }
+
+
 }

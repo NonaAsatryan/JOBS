@@ -31,4 +31,8 @@ public class ResumeController {
         resumeService.save(resume);
         return "resume";
     }
+    @GetMapping("/resume/edit")
+    public String editResumePage() {
+        return "edit-resume";
+    }
 }
