@@ -21,6 +21,8 @@ public class Job {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+//    private String email;
+//    private String mobileNumber;
     private String description;
     @Enumerated(EnumType.STRING)
     private JobType jobType;
