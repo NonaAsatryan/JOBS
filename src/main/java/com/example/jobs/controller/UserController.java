@@ -104,5 +104,18 @@ public class UserController {
         map.addAttribute("resume",resume);
         return "profile";
     }
+    @GetMapping("/user/profileDetails")
+    public String profileDetailsPage() {
+        return "profileDetails";
+    }
+
+    @GetMapping("/bookmark")
+    public String bookmarkPage() {
+        return "bookmark";
+    }
+    @GetMapping("/user/deleteAccount")
+    public String deleteAccountPage() {
+        return "delete-account";
+    }
 
 }
