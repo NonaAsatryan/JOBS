@@ -29,7 +29,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Gender gender;
     private String phone;
-    private String resume;
+//    private String resume;
     @Enumerated(EnumType.STRING)
     private UserType userType;
     private String picUrl;
