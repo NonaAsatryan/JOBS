@@ -48,7 +48,10 @@ public class UserService {
 
 
     public User save(User user) {
-        user.setUserType(UserType.USER);
+        if (user.getUserType() == UserType.EMPLOYER) {
+            user.setUserType(UserType.EMPLOYER);
+        }else {
+        user.setUserType(UserType.USER);}
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
 
@@ -66,16 +69,16 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void saveResumeFile(MultipartFile uploadedFile, User user) throws IOException {
-        if (!uploadedFile.isEmpty()) {
-            String fileName = System.currentTimeMillis() + "_" + uploadedFile.getOriginalFilename();
-            File newFile = new File(filePath + fileName);
-            uploadedFile.transferTo(newFile);
-            user.setResume(fileName);
-        }
-
-        userRepository.save(user);
-    }
+//    public void saveResumeFile(MultipartFile uploadedFile, User user) throws IOException {
+//        if (!uploadedFile.isEmpty()) {
+//            String fileName = System.currentTimeMillis() + "_" + uploadedFile.getOriginalFilename();
+//            File newFile = new File(filePath + fileName);
+//            uploadedFile.transferTo(newFile);
+//            user.setResume(fileName);
+//        }
+//
+//        userRepository.save(user);
+//    }
 
     public User deleteById(int id) {
         userRepository.deleteById(id);
