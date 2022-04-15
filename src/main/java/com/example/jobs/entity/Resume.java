@@ -26,6 +26,8 @@ public class Resume {
     private String languageProficiency;
     private String awards;
     private String picUrl;
+    private String resumeFile;
+    private String address;
 
     @ManyToOne
     private User user;
