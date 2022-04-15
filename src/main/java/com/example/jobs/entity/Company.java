@@ -21,4 +21,6 @@ public class Company {
     private String name;
     private String city;
     private String address;
+    private String email;
+    private String mobileNumber;
 }
