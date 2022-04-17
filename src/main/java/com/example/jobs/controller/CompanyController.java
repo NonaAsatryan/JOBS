@@ -28,8 +28,8 @@ public class CompanyController {
 
     }
     @GetMapping("/company/edit/{id}")
-    public String edidCompanyPage(ModelMap map,
-                               @PathVariable("id") int id) {
+    public String editCompanyPage(ModelMap map,
+                                  @PathVariable("id") int id) {
         map.addAttribute("company", companyService.getById(id));
 
         return "employer-profile";
