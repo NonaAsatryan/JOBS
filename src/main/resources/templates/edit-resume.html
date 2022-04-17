@@ -72,7 +72,8 @@
             <div class="nav-right">
                 <ul class="sign-in">
                     <li><i class="fa fa-user"></i></li>
-                    <li><a href="/user/login">Sign In</a></li>
+                    <li><a href="/user/login">Sign In/</a></li>
+                    <li><a href="/logout">Logout</a></li>
                     <li><a href="/user/register">Register</a></li>
                 </ul>
                 <a href="/job/post" class="btn">Post Your Job</a>
@@ -99,7 +100,7 @@
                             <div class="section express-yourself">
                                 <h4>Express Yourself</h4>
                                 <div class="row form-group">
-                                    <label class="col-md-4 label-title" ></label>
+                                    <label class="col-md-4 label-title"></label>
                                     <div><input th:if="${resume != null}" type="hidden" th:value="${resume.id}"
                                                 name="id"></div>
                                     <!--                                    <div class="col-md-8">-->
@@ -145,89 +146,107 @@
                                     </div>
                                 </div>
                             </div>
-<!--                            <div class="section career-objective">-->
-<!--                                <h4>Career Objective</h4>-->
-<!--                                <div class="form-group">-->
-<!--                                    <textarea name="" class="form-control"-->
-<!--                                              placeholder="Write few lines about your career objective"-->
-<!--                                              rows="8"></textarea>-->
-<!--                                </div>-->
-<!--                                <span>5000 characters left</span>-->
-<!--                            </div>-->
+                            <!--                            <div class="section career-objective">-->
+                            <!--                                <h4>Career Objective</h4>-->
+                            <!--                                <div class="form-group">-->
+                            <!--                                    <textarea name="" class="form-control"-->
+                            <!--                                              placeholder="Write few lines about your career objective"-->
+                            <!--                                              rows="8"></textarea>-->
+                            <!--                                </div>-->
+                            <!--                                <span>5000 characters left</span>-->
+                            <!--                            </div>-->
                             <div class="section">
                                 <h4>Work History</h4>
                                 <div class="row form-group">
                                     <label class="col-md-3 label-title">Compnay Name</label>
                                     <div class="col-md-9">
-                                        <input type="text" name="workExperience" th:value="${resume == null} ? '' : ${resume.workExperience}" class="form-control" placeholder="Name">
+                                        <input type="text" name="workExperience"
+                                               th:value="${resume == null} ? '' : ${resume.workExperience}"
+                                               class="form-control" placeholder="Name">
                                     </div>
                                 </div>
                                 <div class="row form-group">
                                     <label class="col-md-3 label-title">Designation</label>
                                     <div class="col-md-9">
-                                        <input type="text" name="workExperience" th:value="${resume == null} ? '' : ${resume.workExperience}" class="form-control"
+                                        <input type="text" name="workExperience"
+                                               th:value="${resume == null} ? '' : ${resume.workExperience}"
+                                               class="form-control"
                                                placeholder="Human Resource Manager">
                                     </div>
                                 </div>
                                 <div class="row form-group time-period">
                                     <label class="col-md-3 label-title">Time Period</label>
                                     <div class="col-md-9">
-                                        <input type="text" name="workExperience" th:value="${resume == null} ? '' : ${resume.workExperience}" class="form-control"
+                                        <input type="text" name="workExperience"
+                                               th:value="${resume == null} ? '' : ${resume.workExperience}"
+                                               class="form-control"
                                                placeholder="dd/mm/yy"><span>-</span>
-                                        <input type="text" name="workExperience" th:value="${resume == null} ? '' : ${resume.workExperience}" class="form-control pull-right"
+                                        <input type="text" name="workExperience"
+                                               th:value="${resume == null} ? '' : ${resume.workExperience}"
+                                               class="form-control pull-right"
                                                placeholder="dd/mm/yy">
                                     </div>
                                 </div>
-<!--                                <div class="row form-group job-description">-->
-<!--                                    <label class="col-md-3 label-title">Job Description</label>-->
-<!--                                    <div class="col-md-9">-->
-<!--                                        <textarea class="form-control" placeholder="" rows="8"></textarea>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="buttons pull-right">-->
-<!--                                    <a href="edit-resume.html#" class="btn">Add New Exprience</a>-->
-<!--                                    <a href="edit-resume.html#" class="btn delete">Delete</a>-->
-<!--                                </div>-->
+                                <!--                                <div class="row form-group job-description">-->
+                                <!--                                    <label class="col-md-3 label-title">Job Description</label>-->
+                                <!--                                    <div class="col-md-9">-->
+                                <!--                                        <textarea class="form-control" placeholder="" rows="8"></textarea>-->
+                                <!--                                    </div>-->
+                                <!--                                </div>-->
+                                <!--                                <div class="buttons pull-right">-->
+                                <!--                                    <a href="edit-resume.html#" class="btn">Add New Exprience</a>-->
+                                <!--                                    <a href="edit-resume.html#" class="btn delete">Delete</a>-->
+                                <!--                                </div>-->
                             </div>
                             <div class="section education-background">
                                 <h4>Education Background</h4>
                                 <div class="row form-group">
                                     <label class="col-md-3 label-title">Institute Name</label>
                                     <div class="col-md-9">
-                                        <input type="text" name="education" th:value="${resume == null} ? '' : ${resume.education}" class="form-control" placeholder="ropbox">
+                                        <input type="text" name="education"
+                                               th:value="${resume == null} ? '' : ${resume.education}"
+                                               class="form-control" placeholder="ropbox">
                                     </div>
                                 </div>
                                 <div class="row form-group">
                                     <label class="col-md-3 label-title">Degree</label>
                                     <div class="col-md-9">
-                                        <input type="text" name="education" th:value="${resume == null} ? '' : ${resume.education}" class="form-control"
+                                        <input type="text" name="education"
+                                               th:value="${resume == null} ? '' : ${resume.education}"
+                                               class="form-control"
                                                placeholder="Human Resource Manager">
                                     </div>
                                 </div>
                                 <div class="row form-group time-period">
                                     <label class="col-md-3 label-title">Time Period</label>
                                     <div class="col-md-9">
-                                        <input type="text" name="education" th:value="${resume == null} ? '' : ${resume.education}" class="form-control"
+                                        <input type="text" name="education"
+                                               th:value="${resume == null} ? '' : ${resume.education}"
+                                               class="form-control"
                                                placeholder="dd/mm/yy"><span>-</span>
-                                        <input type="text" name="education" th:value="${resume == null} ? '' : ${resume.education}" class="form-control pull-right"
+                                        <input type="text" name="education"
+                                               th:value="${resume == null} ? '' : ${resume.education}"
+                                               class="form-control pull-right"
                                                placeholder="dd/mm/yy">
                                     </div>
                                 </div>
-<!--                                <div class="row form-group job-description">-->
-<!--                                    <label class="col-md-3 label-title">Description</label>-->
-<!--                                    <div class="col-md-9">-->
-<!--                                        <textarea class="form-control" placeholder="" rows="8"></textarea>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="buttons pull-right">-->
-<!--                                    <a href="edit-resume.html#" class="btn">Add New Education</a>-->
-<!--                                    <a href="edit-resume.html#" class="btn delete">Delete</a>-->
-<!--                                </div>-->
+                                <!--                                <div class="row form-group job-description">-->
+                                <!--                                    <label class="col-md-3 label-title">Description</label>-->
+                                <!--                                    <div class="col-md-9">-->
+                                <!--                                        <textarea class="form-control" placeholder="" rows="8"></textarea>-->
+                                <!--                                    </div>-->
+                                <!--                                </div>-->
+                                <!--                                <div class="buttons pull-right">-->
+                                <!--                                    <a href="edit-resume.html#" class="btn">Add New Education</a>-->
+                                <!--                                    <a href="edit-resume.html#" class="btn delete">Delete</a>-->
+                                <!--                                </div>-->
                             </div>
                             <div class="section special-qualification">
                                 <h4>Special Qualification</h4>
                                 <div class="form-group item-description">
-                                    <textarea name="qualifications" th:value="${resume == null} ? '' : ${resume.qualifications}" class="form-control"
+                                    <textarea name="qualifications"
+                                              th:value="${resume == null} ? '' : ${resume.qualifications}"
+                                              class="form-control"
                                               placeholder="Write few lines about your special qualification"
                                               rows="8"></textarea>
                                 </div>
@@ -237,7 +256,9 @@
                                 <div class="row form-group">
                                     <label class="col-md-3 label-title">Language Name</label>
                                     <div class="col-md-9">
-                                        <input type="text" name="languageProficiency" th:value="${resume == null} ? '' : ${resume.languageProficiency}" class="form-control" placeholder="English">
+                                        <input type="text" name="languageProficiency"
+                                               th:value="${resume == null} ? '' : ${resume.languageProficiency}"
+                                               class="form-control" placeholder="English">
                                     </div>
                                 </div>
                                 <div class="row form-group rating">
@@ -269,72 +290,85 @@
                                         </div>
                                     </div>
                                 </div>
-<!--                                <div class="buttons pull-right">-->
-<!--                                    <a href="edit-resume.html#" class="btn">Add New Language</a>-->
-<!--                                    <a href="edit-resume.html#" class="btn delete">Delete</a>-->
-<!--                                </div>-->
+                                <!--                                <div class="buttons pull-right">-->
+                                <!--                                    <a href="edit-resume.html#" class="btn">Add New Language</a>-->
+                                <!--                                    <a href="edit-resume.html#" class="btn delete">Delete</a>-->
+                                <!--                                </div>-->
                             </div>
                             <div class="section company-information">
                                 <h4>Personal Deatils</h4>
                                 <div class="row form-group">
                                     <label class="col-md-3 label-title">Full Name</label>
                                     <div class="col-md-9">
-                                        <input type="text" name="personalDetails" th:value="${resume == null} ? '' : ${resume.personalDetails}" class="form-control" placeholder="Jhon Doe">
+                                        <input type="text" name="personalDetails"
+                                               th:value="${resume == null} ? '' : ${resume.personalDetails}"
+                                               class="form-control" placeholder="Jhon Doe">
                                     </div>
                                 </div>
-<!--                                <div class="row form-group">-->
-<!--                                    <label class="col-md-3 label-title">Father's Name</label>-->
-<!--                                    <div class="col-md-9">-->
-<!--                                        <input type="text" name="name" class="form-control" placeholder="Robert Doe">-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="row form-group">-->
-<!--                                    <label class="col-md-3 label-title">Mother's Name</label>-->
-<!--                                    <div class="col-md-9">-->
-<!--                                        <input type="text" name="name" class="form-control"-->
-<!--                                               placeholder="Imdatic Roderos Doe">-->
-<!--                                    </div>-->
-<!--                                </div>-->
+                                <!--                                <div class="row form-group">-->
+                                <!--                                    <label class="col-md-3 label-title">Father's Name</label>-->
+                                <!--                                    <div class="col-md-9">-->
+                                <!--                                        <input type="text" name="name" class="form-control" placeholder="Robert Doe">-->
+                                <!--                                    </div>-->
+                                <!--                                </div>-->
+                                <!--                                <div class="row form-group">-->
+                                <!--                                    <label class="col-md-3 label-title">Mother's Name</label>-->
+                                <!--                                    <div class="col-md-9">-->
+                                <!--                                        <input type="text" name="name" class="form-control"-->
+                                <!--                                               placeholder="Imdatic Roderos Doe">-->
+                                <!--                                    </div>-->
+                                <!--                                </div>-->
                                 <div class="row form-group">
                                     <label class="col-md-3 label-title">Date of Birth</label>
                                     <div class="col-md-9">
-                                        <input type="text" name="personalDetails" th:value="${resume == null} ? '' : ${resume.personalDetails}" class="form-control" placeholder="26/01/1982">
+                                        <input type="text" name="personalDetails"
+                                               th:value="${resume == null} ? '' : ${resume.personalDetails}"
+                                               class="form-control" placeholder="26/01/1982">
                                     </div>
                                 </div>
                                 <div class="row form-group">
                                     <label class="col-md-3 label-title">Birth Place</label>
                                     <div class="col-md-9">
-                                        <input type="text" name="personalDetails" th:value="${resume == null} ? '' : ${resume.personalDetails}" class="form-control"
+                                        <input type="text" name="personalDetails"
+                                               th:value="${resume == null} ? '' : ${resume.personalDetails}"
+                                               class="form-control"
                                                placeholder="United State of America">
                                     </div>
                                 </div>
                                 <div class="row form-group">
                                     <label class="col-md-3 label-title">Nationality</label>
                                     <div class="col-md-9">
-                                        <input type="text" name="personalDetails" th:value="${resume == null} ? '' : ${resume.personalDetails}" class="form-control" placeholder="Canadian">
+                                        <input type="text" name="personalDetails"
+                                               th:value="${resume == null} ? '' : ${resume.personalDetails}"
+                                               class="form-control" placeholder="Canadian">
                                     </div>
                                 </div>
                                 <div class="row form-group">
                                     <label class="col-md-3 label-title">Gender</label>
                                     <div class="col-md-9">
-                                        <input type="text" name="personalDetails" th:value="${resume == null} ? '' : ${resume.personalDetails}" class="form-control" placeholder="Male">
+                                        <input type="text" name="personalDetails"
+                                               th:value="${resume == null} ? '' : ${resume.personalDetails}"
+                                               class="form-control" placeholder="Male">
                                     </div>
                                 </div>
                                 <div class="row form-group">
                                     <label class="col-md-3 label-title">Address</label>
                                     <div class="col-md-9">
-                                        <input type="text" name="personalDetails" th:value="${resume == null} ? '' : ${resume.personalDetails}" class="form-control"
+                                        <input type="text" name="personalDetails"
+                                               th:value="${resume == null} ? '' : ${resume.personalDetails}"
+                                               class="form-control"
                                                placeholder="121 King Street, Melbourne Victoria, 1200 USA">
                                     </div>
                                 </div>
-<!--                                <div class="buttons pull-right">-->
-<!--                                    <a href="edit-resume.html#" class="btn">Add New Feild</a>-->
-<!--                                </div>-->
+                                <!--                                <div class="buttons pull-right">-->
+                                <!--                                    <a href="edit-resume.html#" class="btn">Add New Feild</a>-->
+                                <!--                                </div>-->
                             </div>
                             <div class="section special-qualification">
                                 <h4>Awards</h4>
                                 <div class="form-group item-description">
-                                    <textarea name="awards" th:value="${resume == null} ? '' : ${resume.awards}"class="form-control" placeholder="" rows="8"></textarea>
+                                    <textarea name="awards" th:value="${resume == null} ? '' : ${resume.awards}"
+                                              class="form-control" placeholder="" rows="8"></textarea>
                                 </div>
                             </div>
                         </fieldset>
@@ -465,6 +499,7 @@
 
 	  ga('create', 'UA-73239902-1', 'auto');
 	  ga('send', 'pageview');
+
 
 
 </script>

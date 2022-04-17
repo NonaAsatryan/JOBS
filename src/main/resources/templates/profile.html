@@ -72,7 +72,8 @@
             <div class="nav-right">
                 <ul class="sign-in">
                     <li><i class="fa fa-user"></i></li>
-                    <li><a href="/user/login">Sign In</a></li>
+                    <li><a href="/user/login">Sign In/</a></li>
+                    <li><a href="/logout">Logout</a></li>
                     <li><a href="/user/register">Register</a></li>
                 </ul>
                 <a href="/job/post" class="btn">Post Your Job</a>
@@ -101,7 +102,7 @@
                 </div>
                 <div th:if="${currentUser != null}" class="user">
                     <h2>Hello, <a href="/user/profile"><span th:text="${currentUser.user.name}"></span></a></h2>
-                    <h5>You last logged in at: 10-01-2017 6:40 AM [ USA time (GMT + 6:00hrs)]</h5>
+<!--                    <h5>You last logged in at: 10-01-2017 6:40 AM [ USA time (GMT + 6:00hrs)]</h5>-->
                 </div>
                 <div class="favorites-user">
                     <div class="my-ads">
