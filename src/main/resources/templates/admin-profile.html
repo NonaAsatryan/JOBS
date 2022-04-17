@@ -50,17 +50,17 @@
                     <li><a href="/">Home</a></li>
                     <li><a href="job-list.html">Job list</a></li>
                     <li><a href="details.html">Job Details</a></li>
-                    <li><a th:if="resume==null" href="/resume">Resume</a></li>
+                    <li><a href="/resume">Resume</a></li>
                     <li class="dropdown active"><a href="javascript:void(0);" class="dropdown-toggle"
                                                    data-toggle="dropdown">Pages<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li class="active"><a href="/user/profile">profile</a></li>
                             <li><a href="/resume/post">Post Resume</a></li>
                             <li><a href="/job/post">Job Post</a></li>
-                            <li><a th:if="${resume!=null}" href="/resume/edit">Edit Resume</a></li>
-                            <li><a href="/profileDetails">profile Details</a></li>
+                            <li><a href="/resume/edit">Edit Resume</a></li>
+                            <li><a href="profileDetails.html">profile Details</a></li>
                             <li><a href="/bookmark">Bookmark</a></li>
-                            <li><a href="/job/appliedJob">Applied Job</a></li>
+                            <li><a href="/appliedJob">Applied Job</a></li>
                             <li><a href="/user/deleteAccount">Close Account</a></li>
                             <li><a href="/user/register">Job Signup</a></li>
                             <li><a href="/user/login">Job Signin</a></li>
@@ -85,8 +85,8 @@
     <div class="container">
         <div class="breadcrumb-section">
             <ol class="breadcrumb">
-                <li><a href="/user/profile">Home</a></li>
-                <li>Employee Profile</li>
+                <li><a href="/">Home</a></li>
+                <li>Admin Profile</li>
             </ol>
             <h2 class="title">My Profile</h2>
         </div>
@@ -97,15 +97,17 @@
                          th:src="@{/getUserImage(picName=${currentUser.user.picUrl})}" alt="User Images"
                          class="img-fluid">
                     <img th:if="${currentUser.user.picUrl== null || currentUser.user.picUrl.isEmpty()}"
-                         src="images/user.jpg" alt="User Images" class="img-fluid">
+                         src="/images/user.jpg" alt="User Images" class="img-fluid">
                 </div>
-                <div th:if="${currentUser != null}" class="user">
-                    <h2>Hello, <a href="/user/profile"><span th:text="${currentUser.user.name}"></span></a></h2>
+                <!--                <div th:if="${currentUser == null}">-->
+                <!--                    <a href="/user/login">Login</a></div>-->
+                <div class="user">
+                    <h2>Hello,<a href="/user/employerProfile"><span th:text="${currentUser.user.name}"></span></a></h2>
                     <h5>You last logged in at: 10-01-2017 6:40 AM [ USA time (GMT + 6:00hrs)]</h5>
                 </div>
                 <div class="favorites-user">
                     <div class="my-ads">
-                        <a href="/job/appliedJob">29<small>Apply Job</small></a>
+                        <a href="/appliedJob">29<small>Apply Job</small></a>
                     </div>
                     <div class="favorites">
                         <a href="/bookmark">18<small>Favorites</small></a>
@@ -113,121 +115,38 @@
                 </div>
             </div>
             <ul class="user-menu">
-                <li class="active"><a href="/user/profile">Account Info </a></li>
-                <li><a th:if="${resume!=null}" href="/resume">View Resume</a></li>
-                <li><a th:if="${resume!=null}" href="/resume/edit">Edit Resume</a></li>
+                <li class="active"><a href="/user/adminProfile">Account Info </a></li>
+                                <li><a href="/category">View Categories</a></li>
+                <!--                <li><a href="/resume/edit">Edit Resume</a></li>-->
                 <li><a href="/user/profileDetails">Profile Details</a></li>
                 <li><a href="/bookmark">Bookmark</a></li>
-                <li><a href="/job/appliedJob">applied job</a></li>
+                <li><a href="/appliedJob">applied job</a></li>
                 <li><a href="/user/deleteAccount">Close account</a></li>
             </ul>
         </div>
-        <div th:if="${resume!=null}" class="resume-content">
-            <div class="profile section clearfix">
-                <div class="profile-logo">
-                    <img class="img-fluid"
-                         th:src="@{/getImage(picture=${resume.picUrl})}"
-                         alt="Image">
+        <form action="/category/save" method="post" enctype="multipart/form-data">
+            <div class="section company-information">
+                <h4>Industry </h4>
+                <div class="row form-group">
+                    <label class="col-sm-3 label-title">Category add<span class="required">*</span></label>
+                    <div class="col-sm-9">
+                        <input th:if="${category != null}" type="hidden" th:value="${category.id}" name="id">
+                    </div>
                 </div>
-                <div class="profile-info">
-                    <h1 th:text="${currentUser.user.name}"></h1>
-                    <address>
-                        <p th:text="${currentUser.user.city}"><br> Phone:
-                        <p th:text="${currentUser.user.phone}"><br> Email:<a href="#"> <span
-                                th:text="${currentUser.user.email}" class="__cf_email__"
-                                data-cfemail="fb928f88969ebb888e898192979e9c9e9e90d5989496">[email&#160;protected]</span></a>
-                        </p>
-                    </address>
+                <div class="row form-group">
+                    <label class="col-sm-3 label-title">Category Name<span class="required">*</span></label>
+                    <div class="col-sm-9">
+                        <input type="text" name="name" th:value="${category == null} ? '' : ${category.name}"
+                               class="form-control" placeholder="Marketing and Advertising">
+                    </div>
                 </div>
-            </div>
-            <div class="work-history section">
-                <div class="icons">
-                    <i class="fa fa-briefcase" aria-hidden="true"></i>
-                </div>
-                <div class="work-info">
-                    <h3>Work History</h3>
-                    <ul>
-                        <li>
-                            <span th:text="${resume.workExperience}"></span>
-                        </li>
-                    </ul>
+                <div>
+                    <input type="file" name="picName" class="form-control"
+                           placeholder="Download picture for category">
                 </div>
             </div>
-            <div class="educational-background section">
-                <div class="icons">
-                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-                </div>
-                <div class="educational-info">
-                    <h3>Education Background</h3>
-                    <ul>
-                        <li>
-                            <ul>
-                                <li><span th:text="${resume.education}"></span></li>
-
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="special-qualification: section">
-                <div class="icons">
-                    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                </div>
-                <div class="qualification">
-                    <h3>Special Qualification:</h3>
-                    <ul>
-                        <li><span th:text="${resume.qualifications}"></span></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="language-proficiency section">
-                <div class="icons">
-                    <i class="fa fa-language" aria-hidden="true"></i>
-                </div>
-                <div class="proficiency">
-                    <h3>Language Proficiency</h3>
-                    <ul class="list-inline">
-                        <li class="list-inline-item">
-                            <h5 th:text="${resume.languageProficiency}"></h5>
-                            <ul>
-                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="personal-deatils section">
-                <div class="icons">
-                    <i class="fa fa-user-secret" aria-hidden="true"></i>
-                </div>
-                <div class="personal-info">
-                    <h3>Personal Deatils</h3>
-                    <ul class="address">
-                        <li><h5 th:text="${resume.personalDetails}"></h5> <span>:</span></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="declaration section">
-                <div class="icons">
-                    <i class="fa fa-hand-peace-o" aria-hidden="true"></i>
-                </div>
-                <div class="declaration-info">
-                    <h3>Awards</h3>
-                    <p><span th:text="${resume.awards}"></span></p>
-                </div>
-            </div>
-            <div class="buttons">
-                <a href="profile.html#" class="btn">Update Profile</a>
-                <a href="profile.html#" class="btn cancle">Cancle</a>
-            </div>
-            <div class="download-button resume">
-                <a th:if="${resume.resumeFile!=null}" th:href="@{/getFile(fileName=${resume.resumeFile})}" class="btn">Download</a>
-            </div>
-        </div>
+            <input type="submit" value="save category">
+        </form>
     </div>
 </section>
 

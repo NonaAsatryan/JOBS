@@ -1,45 +1,77 @@
 package com.example.jobs.controller;
 
 import com.example.jobs.entity.Category;
+import com.example.jobs.sequrity.CurrentUser;
 import com.example.jobs.service.CategoryService;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.transaction.Transactional;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class CategoryController {
 
     private final CategoryService categoryService;
+    @Value("${images.upload.path}")
+    public String imagePath;
 
-   @GetMapping("/categories")
-   public String categoryPage(ModelMap map) {
-       Iterable<Category> categories = categoryService.findAll();
-       map.addAttribute("categories", categories);
-       return "category";
-   }
+//   @GetMapping("/categories")
+//   public String categoryPage(ModelMap map) {
+//       Iterable<Category> categories = categoryService.findAll();
+//       map.addAttribute("categories", categories);
+//       return "category";
+//   }
+//
+//    @GetMapping("/category/save")
+//    public String addCategoryPage() {
+//
+//       return "admin-profile";
+//    }
 
-    @GetMapping("/addCategory")
-    public String addCategoryPage() {
-        return "addCategory";
-    }
-
-    @PostMapping("/addCategory")
-    public String addCategory(@ModelAttribute Category category) {
-        categoryService.save(category);
-        return "redirect:/categories";
-    }
-
-    @GetMapping("/deleteCategory/{id}")
-    @Transactional
+    @GetMapping("/category/delete/{id}")
     public String deleteCategory(@PathVariable("id") int id) {
         categoryService.deleteById(id);
-        return "redirect:/categories";
+        return "redirect:/category";
+
     }
+    @GetMapping("/category/edit/{id}")
+    public String editCategoryPage(ModelMap map,
+                                   @PathVariable("id") int id) {
+        map.addAttribute("category", categoryService.getById(id));
+
+        return "admin-profile";
+
+    }
+    @GetMapping("/category")
+    public String categoryPage(@ModelAttribute Category category,
+                              @ModelAttribute CurrentUser currentUser, ModelMap map) {
+        List<Category> categories = categoryService.findAll();
+        map.addAttribute("categories", categories);
+        return "category";
+    }
+
+    @PostMapping("/category/save")
+    public String saveCategory(@ModelAttribute Category category, @RequestParam("picName") MultipartFile uploadedImageFile) throws IOException {
+        categoryService.create(category);
+        categoryService.saveCategoryPic(uploadedImageFile,category);
+        return "admin-profile";
+    }
+
+    @GetMapping(value = "/getCategoryPic", produces = MediaType.IMAGE_JPEG_VALUE)
+    public @ResponseBody
+    byte[] getImage(@RequestParam("picName") String picName) throws IOException {
+        InputStream inputStream = new FileInputStream(imagePath + picName);
+        return IOUtils.toByteArray(inputStream);
+    }
+
 }
