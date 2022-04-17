@@ -14,7 +14,7 @@ public class CompanyService {
     private final CompanyRepository companyRepository;
 
     public List<Company> findAll() {
-       return companyRepository.findAll();
+        return companyRepository.findAll();
 
     }
 //    public List<Company> findAllByUser(User user) {

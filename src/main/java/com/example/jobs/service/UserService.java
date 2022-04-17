@@ -1,10 +1,8 @@
 package com.example.jobs.service;
 
-import com.example.jobs.entity.Resume;
 import com.example.jobs.entity.User;
 import com.example.jobs.entity.UserType;
 import com.example.jobs.repository.UserRepository;
-import com.example.jobs.sequrity.CurrentUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -51,7 +48,7 @@ public class UserService {
         if (user.getUserType() == UserType.EMPLOYER) {
             user.setUserType(UserType.EMPLOYER);
         }else {
-        user.setUserType(UserType.USER);}
+            user.setUserType(UserType.USER);}
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
 

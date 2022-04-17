@@ -50,14 +50,14 @@
                     <li><a href="/">Home</a></li>
                     <li><a href="job-list.html">Job list</a></li>
                     <li><a href="details.html">Job Details</a></li>
-                    <li><a href="/resume">Resume</a></li>
+                    <li><a th:if="${resume!=null}" href="/resume">Resume</a></li>
                     <li class="dropdown active"><a href="javascript:void(0);" class="dropdown-toggle"
                                                    data-toggle="dropdown">Pages<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li class="active"><a href="/user/profile">profile</a></li>
                             <li><a href="/resume/post">Post Resume</a></li>
                             <li><a href="/job/post">Job Post</a></li>
-                            <li><a href="/resume/edit">Edit Resume</a></li>
+                            <li><a th:if="${resume!=null}" href="/resume/edit">Edit Resume</a></li>
                             <li><a href="/profileDetails">profile Details</a></li>
                             <li><a href="/bookmark">Bookmark</a></li>
                             <li><a href="/job/appliedJob">Applied Job</a></li>
@@ -85,7 +85,7 @@
     <div class="container">
         <div class="breadcrumb-section">
             <ol class="breadcrumb">
-                <li><a href="/">Home</a></li>
+                <li><a href="/user/profile">Home</a></li>
                 <li>Employee Profile</li>
             </ol>
             <h2 class="title">My Profile</h2>
@@ -114,18 +114,18 @@
             </div>
             <ul class="user-menu">
                 <li class="active"><a href="/user/profile">Account Info </a></li>
-                <li><a href="/resume">View Resume</a></li>
-                <li><a href="/resume/edit">Edit Resume</a></li>
+                <li><a th:if="${resume!=null}" href="/resume">View Resume</a></li>
+                <li><a th:if="${resume!=null}" href="/resume/edit">Edit Resume</a></li>
                 <li><a href="/user/profileDetails">Profile Details</a></li>
                 <li><a href="/bookmark">Bookmark</a></li>
                 <li><a href="/job/appliedJob">applied job</a></li>
                 <li><a href="/user/deleteAccount">Close account</a></li>
             </ul>
         </div>
-        <div class="resume-content">
+        <div th:if="${resume!=null}" class="resume-content">
             <div class="profile section clearfix">
                 <div class="profile-logo">
-                    <img class="img-fluid" th:if="${resume.picUrl != null && !resume.picUrl.isEmpty()}"
+                    <img class="img-fluid"
                          th:src="@{/getImage(picture=${resume.picUrl})}"
                          alt="Image">
                 </div>
@@ -140,9 +140,6 @@
                     </address>
                 </div>
             </div>
-            <div><input th:if="${resume != null}" type="hidden" th:value="${resume.id}"
-                        name="id"></div>
-
             <div class="work-history section">
                 <div class="icons">
                     <i class="fa fa-briefcase" aria-hidden="true"></i>

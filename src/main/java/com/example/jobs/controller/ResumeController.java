@@ -30,14 +30,17 @@ public class ResumeController {
     public String filePath;
 
     @GetMapping("/resume")
-    public String resumePage(@ModelAttribute Resume resume, ModelMap map) {
-        map.addAttribute("resume", resume);
+    public String resumePage(ModelMap map, @ModelAttribute CurrentUser currentUser) {
+        Resume resume = resumeService.findByUserId(currentUser.getUser().getId());
+        if (resume != null) {
+            map.addAttribute("resume", resume);
+        }
         return "resume";
     }
 
     @GetMapping("/resume/post")
-    public String postResumePage(@ModelAttribute CurrentUser currentUser,ModelMap map) {
-        map.addAttribute("currentUser",currentUser);
+    public String postResumePage(@ModelAttribute CurrentUser currentUser, ModelMap map) {
+        map.addAttribute("currentUser", currentUser);
         return "post-resume";
     }
 
@@ -52,6 +55,7 @@ public class ResumeController {
 
         return "resume";
     }
+
     @PostMapping("/resume/edit")
     public String editResume(@ModelAttribute Resume resume, @ModelAttribute CurrentUser currentUser,
                              @RequestParam("picture") MultipartFile uploadedImageFile,
@@ -78,18 +82,22 @@ public class ResumeController {
         return IOUtils.toByteArray(inputStream);
     }
 
-    @GetMapping("/resume/update")
-    public String resumeEditPage(ModelMap map, @ModelAttribute Resume resume) {
-        map.addAttribute("resume", resume);
-        return "redirect:/user/profile";
+    @GetMapping("/resume/edit")
+    public String resumeEditPage(ModelMap map, @ModelAttribute CurrentUser currentUser) {
+        Resume resume = resumeService.findByUserId(currentUser.getUser().getId());
+        if (resume != null) {
+            map.addAttribute("resume", resume);
+        }
+        return "edit-resume";
     }
 
-    @GetMapping("/resume/edit/{id}")
-    public String resumeEdit(ModelMap map,@PathVariable("id") int id) {
+    @GetMapping("/resume/update/{id}")
+    public String resumeEdit(ModelMap map, @PathVariable("id") int id) {
 
-        map.addAttribute("resume",resumeService.getById(id));
+        map.addAttribute("resume", resumeService.getById(id));
         return "edit-resume";
 
     }
+
 }
 

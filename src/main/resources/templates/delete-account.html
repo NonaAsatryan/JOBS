@@ -121,7 +121,9 @@
             <div class="delete-account section">
                 <h2>Delete Your Account</h2>
                 <h4>Are you sure, you want to delete your account?</h4>
-                <a href="/user/deleteAccount" class="btn">Delete Account</a>
+                <div><input th:if="${currentUser != null}" type="hidden" th:value="${currentUser.user.id}"
+                            name="id"></div>
+                <a th:href="@{'/user/delete/' + ${currentUser.user.id}}" class="btn">Delete Account</a>
                 <a href="/user/profile" class="btn cancle">Cancle</a>
             </div>
         </div>

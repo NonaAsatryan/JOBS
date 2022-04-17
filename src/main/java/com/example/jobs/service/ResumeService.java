@@ -30,16 +30,30 @@ public class ResumeService {
         return resumeRepository.save(resume);
     }
 
-    public Resume addResume(Resume resume, MultipartFile uploadedImageFile,MultipartFile uploadedFile,  User user) throws IOException {
+    public void addResume(Resume resume, MultipartFile uploadedImageFile,MultipartFile uploadedFile,  User user) throws IOException {
         resume.setUser(user);
-        resumeRepository.save(resume);
-        saveResumeImage(uploadedImageFile, resume);
-        saveResumeFile(uploadedFile, resume);
-        return resume;
+        saveFiles(uploadedFile,uploadedImageFile, resume);
+
     }
 
-    public void saveResumeImage(MultipartFile uploadedImageFile, Resume resume) throws IOException {
-        if (!uploadedImageFile.isEmpty()) {
+//    public void saveResumeImage(MultipartFile uploadedImageFile, Resume resume) throws IOException {
+//        if (!uploadedImageFile.isEmpty()) {
+//            String picture = System.currentTimeMillis() + "_" + uploadedImageFile.getOriginalFilename();
+//            File newFile = new File(imagePath + picture);
+//            uploadedImageFile.transferTo(newFile);
+//            resume.setPicUrl(picture);
+//        }
+//
+//        resumeRepository.save(resume);
+//    }
+
+    public void saveFiles(MultipartFile uploadedFile,MultipartFile uploadedImageFile, Resume resume) throws IOException {
+        if (!uploadedFile.isEmpty()) {
+            String fileName = System.currentTimeMillis() + "_" + uploadedFile.getOriginalFilename();
+            File newFile = new File(filePath + fileName);
+            uploadedFile.transferTo(newFile);
+            resume.setResumeFile(fileName);
+        }   if (!uploadedImageFile.isEmpty()) {
             String picture = System.currentTimeMillis() + "_" + uploadedImageFile.getOriginalFilename();
             File newFile = new File(imagePath + picture);
             uploadedImageFile.transferTo(newFile);
@@ -49,19 +63,8 @@ public class ResumeService {
         resumeRepository.save(resume);
     }
 
-    public void saveResumeFile(MultipartFile uploadedFile, Resume resume) throws IOException {
-        if (!uploadedFile.isEmpty()) {
-            String fileName = System.currentTimeMillis() + "_" + uploadedFile.getOriginalFilename();
-            File newFile = new File(filePath + fileName);
-            uploadedFile.transferTo(newFile);
-            resume.setResumeFile(fileName);
-        }
-
-        resumeRepository.save(resume);
-    }
-
-    public Resume findById(int id) {
-        return resumeRepository.getById(id);
+    public Resume findByUserId(int id) {
+        return resumeRepository.findByUser_Id(id);
 
     }
 

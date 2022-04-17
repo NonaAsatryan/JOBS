@@ -94,19 +94,15 @@
         <div class="job-postdetails post-resume">
             <div class="row">
                 <div class="col-lg-8 clearfix">
-                    <input th:if="${currentUser.user != null}" type="hidden" th:value="${currentUser.user.id}"
-                           name="id">
-                    <form action="/resume/edit" method="post" enctype="multipart/form-data">
+                    <form action="/resume/post" method="post" enctype="multipart/form-data">
+                        <input th:if="${currentUser.user != null}" type="hidden" th:value="${currentUser.user.id}"
+                               name="id">
                         <fieldset>
                             <div class="section express-yourself">
                                 <h4>Express Yourself</h4>
                                 <div class="row form-group">
-                                    <label class="col-md-4 label-title">Full Name</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="name"
-                                               th:value="${resume == null} ? '' : ${resume.user.name}"
-                                        class="form-control" placeholder="ex Jhon Doe">
-                                    </div>
+                                    <label class="col-md-4 label-title"></label>
+
                                     <div><input th:if="${resume != null}" type="hidden" th:value="${resume.id}"
                                                 name="id"></div>
                                 </div>
@@ -122,29 +118,34 @@
                                     <label class="col-md-4 label-title">Photos for your Resume</label>
                                     <div class="col-md-8 ">
                                         <label class="upload-image left" for="upload-image-one">
-                                            <input type="file" name="picture"
+                                            <input type="file" name="picture" th:value="${resume == null} ? '' : ${resume.picUrl}"
                                                    id="upload-image-one">
                                             Type: JPG, PNG Size: 3.5 x 4.5 cm
                                         </label>
                                         <label class="upload-image" for="upload-image-two">
-                                            <input type="file" name="picture" id="upload-image-two">
+                                            <input type="file" name="picture" th:value="${resume == null} ? '' : ${resume.picUrl}" id="upload-image-two">
                                             Upload Photo
                                         </label>
                                     </div>
                                 </div>
                                 <div class="row form-group photos-resume">
-                                    <label class="col-sm-4 label-title">Document for your Resume</label>
-                                    <div class="col-sm-8 ">
-                                        <label class="upload-image left" for="upload-image-one">
-                                            <input type="file" name="fileName">
-                                            Type: PDF
-                                        </label>
-                                        <label class="upload-image" for="upload-image-two">
-                                            <input type="file" name="fileName">
-                                            Upload Resume
-                                        </label>
-                                    </div>
+                                    <input type="file" name="fileName" class="form-control"
+                                           placeholder="Download your resume">
+
                                 </div>
+<!--                                <div class="row form-group photos-resume">-->
+<!--                                    <label class="col-sm-4 label-title">Document for your Resume</label>-->
+<!--                                    <div class="col-sm-8 ">-->
+<!--                                        <label class="upload-image left" for="upload-image-one">-->
+<!--                                            <input type="file" name="fileName">-->
+<!--                                            Type: PDF-->
+<!--                                        </label>-->
+<!--                                        <label class="upload-image" for="upload-image-two">-->
+<!--                                            <input type="file" name="fileName">-->
+<!--                                            Upload Resume-->
+<!--                                        </label>-->
+<!--                                    </div>-->
+<!--                                </div>-->
                             </div>
                             <!--                            <div class="section career-objective">-->
                             <!--                                <h4>Career Objective</h4>-->

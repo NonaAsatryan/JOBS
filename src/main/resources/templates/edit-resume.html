@@ -86,7 +86,7 @@
         <div class="breadcrumb-section">
 
             <ol class="breadcrumb">
-                <li><a href="/">Home</a></li>
+                <li><a href="/user/profile">Home</a></li>
                 <li>Edit Resume</li>
             </ol>
             <h2 class="title">Edit Resume</h2>
@@ -99,7 +99,7 @@
                             <div class="section express-yourself">
                                 <h4>Express Yourself</h4>
                                 <div class="row form-group">
-                                    <label class="col-md-4 label-title">Full Name</label>
+                                    <label class="col-md-4 label-title" ></label>
                                     <div><input th:if="${resume != null}" type="hidden" th:value="${resume.id}"
                                                 name="id"></div>
                                     <!--                                    <div class="col-md-8">-->
@@ -341,7 +341,7 @@
                         <input type="submit" value="edit resume" class="btn">
                     </form>
                     <div class="buttons">
-                        <a href="/resume/update" class="btn">Update Profile</a>
+                        <a th:href="@{'/resume/update/' + ${resume.id}}" class="btn">Update Profile</a>
                         <a href="/resume" class="btn cancle">Cancle</a>
                     </div>
                 </div>

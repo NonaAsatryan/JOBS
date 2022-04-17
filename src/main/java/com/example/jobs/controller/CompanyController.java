@@ -28,7 +28,7 @@ public class CompanyController {
 
     }
     @GetMapping("/company/edit/{id}")
-    public String editUserPage(ModelMap map,
+    public String edidCompanyPage(ModelMap map,
                                @PathVariable("id") int id) {
         map.addAttribute("company", companyService.getById(id));
 
