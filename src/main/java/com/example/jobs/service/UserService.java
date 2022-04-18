@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -80,5 +81,9 @@ public class UserService {
     public User deleteById(int id) {
         userRepository.deleteById(id);
         return null;
+    }
+
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 }

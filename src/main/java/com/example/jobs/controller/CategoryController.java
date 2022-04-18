@@ -1,7 +1,6 @@
 package com.example.jobs.controller;
 
 import com.example.jobs.entity.Category;
-import com.example.jobs.sequrity.CurrentUser;
 import com.example.jobs.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.IOUtils;
@@ -25,18 +24,6 @@ public class CategoryController {
     @Value("${images.upload.path}")
     public String imagePath;
 
-//   @GetMapping("/categories")
-//   public String categoryPage(ModelMap map) {
-//       Iterable<Category> categories = categoryService.findAll();
-//       map.addAttribute("categories", categories);
-//       return "category";
-//   }
-//
-//    @GetMapping("/category/save")
-//    public String addCategoryPage() {
-//
-//       return "admin-profile";
-//    }
 
     @GetMapping("/category/delete/{id}")
     public String deleteCategory(@PathVariable("id") int id) {
@@ -44,6 +31,7 @@ public class CategoryController {
         return "redirect:/category";
 
     }
+
     @GetMapping("/category/edit/{id}")
     public String editCategoryPage(ModelMap map,
                                    @PathVariable("id") int id) {
@@ -52,9 +40,9 @@ public class CategoryController {
         return "admin-profile";
 
     }
+
     @GetMapping("/category")
-    public String categoryPage(@ModelAttribute Category category,
-                              @ModelAttribute CurrentUser currentUser, ModelMap map) {
+    public String categoryPage(@ModelAttribute Category category, ModelMap map) {
         List<Category> categories = categoryService.findAll();
         map.addAttribute("categories", categories);
         return "category";
@@ -63,7 +51,7 @@ public class CategoryController {
     @PostMapping("/category/save")
     public String saveCategory(@ModelAttribute Category category, @RequestParam("picName") MultipartFile uploadedImageFile) throws IOException {
         categoryService.create(category);
-        categoryService.saveCategoryPic(uploadedImageFile,category);
+        categoryService.saveCategoryPic(uploadedImageFile, category);
         return "admin-profile";
     }
 

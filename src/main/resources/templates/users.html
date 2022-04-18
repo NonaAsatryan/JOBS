@@ -48,18 +48,18 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="nav navbar-nav">
                     <li><a href="/">Home</a></li>
-                    <li><a href="job-list.html">Job list</a></li>
+                    <li><a href="/job/jobList">Job list</a></li>
                     <li><a href="details.html">Job Details</a></li>
-                    <li><a href="/resume">Resume</a></li>
+<!--                    <li><a href="/resume">Resume</a></li>-->
                     <li class="dropdown active"><a href="javascript:void(0);" class="dropdown-toggle"
                                                    data-toggle="dropdown">Pages<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li class="active"><a href="/user/profile">profile</a></li>
-                            <!--                            <li><a href="/resume/post">Post Resume</a></li>-->
-                            <li><a href="/job/post">Job Post</a></li>
-                            <!--                            <li><a href="/resume/edit">Edit Resume</a></li>-->
-                            <li><a href="profileDetails.html">profile Details</a></li>
-                            <li><a href="bookmark.html">Bookmark</a></li>
+                            <li class="active"><a href="/user/adminProfile">profile</a></li>
+<!--                            <li><a href="/resume/post">Post Resume</a></li>-->
+<!--                            <li><a href="/job/post">Job Post</a></li>-->
+<!--                            <li><a href="/resume/edit">Edit Resume</a></li>-->
+                            <li><a href="/profileDetails">profile Details</a></li>
+                            <li><a href="/bookmark">Bookmark</a></li>
                             <li><a href="applied-job.html">Applied Job</a></li>
                             <li><a href="/user/deleteAccount">Close Account</a></li>
                             <li><a href="/user/register">Job Signup</a></li>
@@ -86,108 +86,44 @@
     <div class="container">
         <div class="breadcrumb-section">
             <ol class="breadcrumb">
-                <li><a href="/user/employerProfile">Home</a></li>
-                <li>Employer Profile</li>
+                <li><a href="/user/adminProfile">Home</a></li>
+                <li>Admin Profile</li>
             </ol>
             <h2 class="title">My Profile</h2>
         </div>
         <div class="job-profile section">
             <div class="user-profile">
-                <div class="user-images">
-                    <img th:if="${currentUser.user.picUrl != null && !currentUser.user.picUrl.isEmpty()}"
-                         th:src="@{/getUserImage(picName=${currentUser.user.picUrl})}" alt="User Images"
-                         class="img-fluid">
-                    <img th:if="${currentUser.user.picUrl== null || currentUser.user.picUrl.isEmpty()}"
-                         src="/images/user.jpg" alt="User Images" class="img-fluid">
-                </div>
-
-                <div class="user">
-                    <h2>Hello, <a href="/user/employerProfile"><span th:text="${currentUser.user.name}"></span></a></h2>
-                    <!--                    <h5>You last logged in at: 10-01-2017 6:40 AM [ USA time (GMT + 6:00hrs)]</h5>-->
-                </div>
-                <div class="profile section clearfix">
-
-                    <div class="profile-info">
-                        <!--                        <h1 th:text="${currentUser.user.name}"></h1>-->
-                        <address>
-                            <p>Address:
-                            <p th:text="${currentUser.user.city}"></p><br>
-                            Phone: <p th:text="${currentUser.user.phone}"></p>
-                            <br> Email: <p th:text="${currentUser.user.email}"></p><a
-                                href="/user/employerProfile.html#"> <span
-                                class="__cf_email__"
-                                data-cfemail="fb928f88969ebb888e898192979e9c9e9e90d5989496">[email&#160;protected]</span></a>
-                            </p>
-                        </address>
-                    </div>
-                </div>
-                <div class="favorites-user">
-                    <div class="my-ads">
-                        <a href="/job/appliedJob">29<small>Apply Job</small></a>
-                    </div>
-                    <div class="favorites">
-                        <a href="/bookmark">18<small>Favorites</small></a>
-                    </div>
-                </div>
+<!--                <div class="user-images">-->
+<!--                    <img th:if="${currentUser.user.picUrl != null && !currentUser.user.picUrl.isEmpty()}"-->
+<!--                         th:src="@{/getUserImage(picName=${currentUser.user.picUrl})}" alt="User Images"-->
+<!--                         class="img-fluid">-->
+<!--                    <img th:if="${currentUser.user.picUrl== null || currentUser.user.picUrl.isEmpty()}"-->
+<!--                         src="/images/user.jpg" alt="User Images" class="img-fluid">-->
+<!--                </div>-->
             </div>
-            <ul class="user-menu">
-                <li class="active"><a href="/user/employerProfile">Account Info </a></li>
-                <li><a href="/company">View Company</a></li>
-                <!--                <li><a href="/resume/edit">Edit Resume</a></li>-->
-                <li><a href="/user/profileDetails">Profile Details</a></li>
-                <li><a href="/bookmark">Bookmark</a></li>
-                <li><a href="/job/appliedJob">applied job</a></li>
-                <li><a href="/user/deleteAccount">Close account</a></li>
-            </ul>
         </div>
-
-
-        <form action="/company/save" method="post" enctype="multipart/form-data">
-            <div class="section company-information">
-                <h4>Company Information</h4>
-                <div class="row form-group">
-                    <label class="col-sm-3 label-title">Industry<span class="required">*</span></label>
-                    <div class="col-sm-9">
-                        <input th:if="${company != null}" type="hidden" th:value="${company.id}" name="id">
-                    </div>
-                    <div class="col-sm-9">
-                        <input type="text" name="categoryId" class="form-control"
-                               placeholder="Marketing and Advertising">
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <label class="col-sm-3 label-title">Company Name<span class="required">*</span></label>
-                    <div class="col-sm-9">
-                        <input type="text" name="name" th:value="${company == null} ? '' : ${company.name}"
-                               class="form-control" placeholder="ex, Jhon Doe">
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <label class="col-sm-3 label-title">Email ID</label>
-                    <div class="col-sm-9">
-                        <input type="email" name="email" th:value="${company == null} ? '' : ${company.email}"
-                               class="form-control" placeholder="ex, jhondoe@mail.com">
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <label class="col-sm-3 label-title">Mobile Number<span class="required">*</span></label>
-                    <div class="col-sm-9">
-                        <input type="text" name="mobileNumber"
-                               th:value="${company == null} ? '' : ${company.mobileNumber}" class="form-control"
-                               placeholder="ex, +912457895">
-                    </div>
-                </div>
-                <div class="row form-group address">
-                    <label class="col-sm-3 label-title">Address<span class="required">*</span></label>
-                    <div class="col-sm-9">
-                        <input type="text" name="address" th:value="${company == null} ? '' : ${company.address}"
-                               class="form-control"
-                               placeholder="ex, alekdera House, coprotec, usa">
-                    </div>
-                </div>
-                <input type="submit" value="save company">
-            </div>
-        </form>
+        <table>
+            <tr>
+                <th>id</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Email</th>
+                <th>Mobile Number</th>
+                <th>User Type</th>
+                <th>Address</th>
+                <th>action</th>
+            </tr>
+            <tr th:each="user:${users}">
+                <td th:text="${user.id}"> </td>
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.surname}"></td>
+                <td th:text="${user.email}"></td>
+                <td th:text="${user.phone}"></td>
+                <td th:text="${user.userType.name()}"></td>
+                <td th:text="${user.city}"></td>
+                <td><a th:href="@{'/user/remove/' + ${user.id}}">delete</a></td>
+            </tr>
+        </table>
 
     </div>
 </section>
@@ -289,8 +225,6 @@
 
 	  ga('create', 'UA-73239902-1', 'auto');
 	  ga('send', 'pageview');
-
-
 
 
 

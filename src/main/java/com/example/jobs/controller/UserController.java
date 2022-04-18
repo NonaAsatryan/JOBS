@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -41,20 +42,11 @@ public class UserController {
     public String registerPage() {
         return "signup";
     }
+
     @GetMapping("/user/employerRegister")
     public String employerRegisterPage() {
         return "signup";
     }
-
-//    @GetMapping("/user/companyRegister")
-//    public String companyRegisterPage(){
-//        return "signup";
-//    }
-//    @PostMapping("/user/companyRegister")
-//    public String CompanyRegister(@ModelAttribute User user, @ModelAttribute Company company){
-//
-//
-//    }
 
     @PostMapping("/user/register")
     public String addUser(@ModelAttribute User user,
@@ -65,9 +57,10 @@ public class UserController {
 
         return "redirect:/user/login";
     }
+
     @PostMapping("/user/employerRegister")
     public String addEmployer(@ModelAttribute User user,
-                          @RequestParam("picName") MultipartFile uploadedImageFile) throws IOException {
+                              @RequestParam("picName") MultipartFile uploadedImageFile) throws IOException {
         userService.save(user);
         userService.saveUserImage(uploadedImageFile, user);
 //        userService.saveResumeFile(uploadedFile, user);
@@ -128,17 +121,19 @@ public class UserController {
     @GetMapping("/user/profile")
     public String profilePage(@ModelAttribute CurrentUser currentUser, ModelMap map) {
         map.addAttribute("currentUser", currentUser);
-        Resume resume=resumeService.findByUserId(currentUser.getUser().getId());
-        if (resume!=null){
-        map.addAttribute("resume", resume);}
+        Resume resume = resumeService.findByUserId(currentUser.getUser().getId());
+        if (resume != null) {
+            map.addAttribute("resume", resume);
+        }
         return "profile";
     }
+
     @GetMapping("/user/adminProfile")
-    public String adminProfilePage(@ModelAttribute CurrentUser currentUser, @ModelAttribute Resume resume, ModelMap map) {
+    public String adminProfilePage(@ModelAttribute CurrentUser currentUser, ModelMap map) {
         map.addAttribute("currentUser", currentUser);
-        map.addAttribute("resume", resume);
         return "admin-profile";
     }
+
     @GetMapping("/user/employerProfile")
     public String employerProfilePage(@ModelAttribute CurrentUser currentUser, @ModelAttribute Resume resume, ModelMap map) {
         map.addAttribute("currentUser", currentUser);
@@ -155,6 +150,19 @@ public class UserController {
     @GetMapping("/bookmark")
     public String bookmarkPage() {
         return "bookmark";
+    }
+
+    @GetMapping("/user/remove/{id}")
+    public String deleteUserByAdmin(@PathVariable("id") int id) {
+        userService.deleteById(id);
+        return "redirect:/users";
+
+    }
+    @GetMapping("/users")
+    public String usersPage(@ModelAttribute CurrentUser currentUser, ModelMap map) {
+        List<User> users = userService.findAll();
+        map.addAttribute("users", users);
+        return "users";
     }
 
 }
