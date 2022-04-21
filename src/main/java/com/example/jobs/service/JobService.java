@@ -5,6 +5,8 @@ import com.example.jobs.repository.CategoryRepository;
 import com.example.jobs.repository.CompanyRepository;
 import com.example.jobs.repository.JobRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,7 +38,7 @@ public class JobService {
         return jobRepository.getById(id);
     }
 
-    public List<Job> findAll() {
-        return jobRepository.findAll();
+    public Page<Job> findAll(Pageable pageable) {
+        return jobRepository.findAll(pageable);
     }
 }

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <title>Jobs | Job Portal / Job Board HTML Template</title>
     <div th:include="fragments/head-fragment:: head"></div>
 
 </head>
@@ -25,6 +26,11 @@
                         <fieldset>
                             <div class="section postdetails">
                                 <h4>Post Your Job<span class="pull-right">* Mandatory Fields</span></h4>
+                                <div th:if="${errors != null && !errors.isEmpty()}">
+                                    <ul>
+                                        <li style="color: red" th:each="error:${errors}" th:text="${error}"></li>
+                                    </ul>
+                                </div>
                                 <div class="row form-group brand-name">
                                     <label class="col-sm-3 label-title">Name<span class="required">*</span></label>
                                     <div class="col-sm-9">
@@ -61,42 +67,6 @@
                                                   placeholder="Write few lines about your jobs" rows="8"></textarea>
                                     </div>
                                 </div>
-                                <!--                                <div class="row characters">-->
-                                <!--                                    <div class="col-sm-9 col-sm-offset-3">-->
-                                <!--                                        <p>5000 characters left</p>-->
-                                <!--                                    </div>-->
-                                <!--                                </div>-->
-                                <!--                                <div class="row form-group add-title location">-->
-                                <!--                                    <label class="col-sm-3 label-title">Location<span class="required">*</span></label>-->
-                                <!--                                    <div class="col-sm-9">-->
-                                <!--                                        <div class="dropdown category-dropdown pull-left">-->
-                                <!--                                            <a data-toggle="dropdown" href="#" aria-expanded="false"><span class="change-text">Country</span> <i class="fa fa-angle-down pull-right"></i></a>-->
-                                <!--                                            <ul class="dropdown-menu category-change">-->
-
-                                <!--                                                <li><a href="#" th:each="company:${companies}" th:text="${company.city }" th:value="${company.id}"></a></li>-->
-                                <!--                                            </ul>-->
-                                <!--                                        </div>-->
-                                <!--&lt;!&ndash;                                        <div class="dropdown category-dropdown pull-right">&ndash;&gt;-->
-                                <!--                                            <a data-toggle="dropdown" href="#" aria-expanded="false"><span class="change-text">State</span> <i class="fa fa-angle-down pull-right"></i></a>-->
-                                <!--                                            <ul class="dropdown-menu category-change">-->
-                                <!--                                                <li><a href="#">State 1</a></li>-->
-                                <!--                                                <li><a href="#">State 2</a></li>-->
-                                <!--                                                <li><a href="#">State 3</a></li>-->
-                                <!--                                            </ul>-->
-                                <!--                                        </div>-->
-                                <!--                                    </div>-->
-                                <!--                                </div>-->
-
-
-
-<!--                                <div class="row form-group select-price">-->
-<!--                                    <label class="col-sm-3 label-title">Salary<span class="required">*</span></label>-->
-
-<!--                                    <div class="col-sm-9">-->
-<!--                                        <label>$USD</label>-->
-<!--                                        <input type="text" name="salary" class="form-control" placeholder="Salary">-->
-<!--                                    </div>-->
-
                                     <div class="row form-group select-price">
                                         <label class="col-sm-3 label-title">Salary<span
                                             /job/post class="required">*</span></label>
@@ -104,7 +74,6 @@
                                             <input type="number" name="salary" class="form-control" placeholder="Salary">
                                         </div>
                                     </div>
-<!--                                </div>-->
                                 <div class="row form-group add-title">
                                     <label class="col-sm-3 label-title">Company<span class="required">*</span></label>
                                     <div class="col-sm-9">
@@ -116,96 +85,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--                            <div class="section company-information">-->
-                            <!--                                <h4>Company Information</h4>-->
-                            <!--                                <div class="row form-group">-->
-                            <!--                                    <label class="col-sm-3 label-title">Industry<span class="required">*</span></label>-->
-                            <!--                                    <div class="col-sm-9">-->
-                            <!--                                        <input type="text" name="name" class="form-control" placeholder="Marketing and Advertising">-->
-                            <!--                                    </div>-->
-                            <!--                                </div>-->
-                            <!--                                <div class="row form-group">-->
-                            <!--                                    <label class="col-sm-3 label-title">Company Name<span class="required">*</span></label>-->
-                            <!--                                    <div class="col-sm-9">-->
-                            <!--                                        <input type="text" name="name" class="form-control" placeholder="ex, Jhon Doe">-->
-                            <!--                                    </div>-->
-                            <!--                                </div>-->
-                            <!--                                <div class="row form-group">-->
-                            <!--                                    <label class="col-sm-3 label-title">Email ID</label>-->
-                            <!--                                    <div class="col-sm-9">-->
-                            <!--                                        <input type="email" name="email" class="form-control" placeholder="ex, jhondoe@mail.com">-->
-                            <!--                                    </div>-->
-                            <!--                                </div>-->
-                            <!--                                <div class="row form-group">-->
-                            <!--                                    <label class="col-sm-3 label-title">Mobile Number<span class="required">*</span></label>-->
-                            <!--                                    <div class="col-sm-9">-->
-                            <!--                                        <input type="text" name="mobileNumber" class="form-control" placeholder="ex, +912457895">-->
-                            <!--                                    </div>-->
-                            <!--                                </div>-->
-                            <!--                                <div class="row form-group address">-->
-                            <!--                                    <label class="col-sm-3 label-title">Address<span class="required">*</span></label>-->
-                            <!--                                    <div class="col-sm-9">-->
-                            <!--                                        <input type="text" name="address" class="form-control" placeholder="ex, alekdera House, coprotec, usa">-->
-                            <!--                                    </div>-->
-                            <!--                                </div>-->
-                            <!--                            </div>-->
-                            <div class="section">
-                                <h4>Make Your Post Premium</h4>
-                                <p>More replies means more interested buyers. With lots of interested buyers, you have a
-                                    better chance of selling for the price that you want.<a href="#">Learn more</a></p>
-                                <ul class="premium-options">
-                                    <li class="premium">
-                                        <input type="radio" name="premiumOption" value="day-one" id="day-one">
-                                        <label for="day-one">Regular Post</label>
-                                        <span>$20.00</span>
-                                    </li>
-                                    <li class="premium">
-                                        <input type="radio" name="premiumOption" value="day-two" id="day-two">
-                                        <label for="day-two">Regular Post</label>
-                                        <span>$30.00</span>
-                                    </li>
-                                    <li class="premium">
-                                        <input type="radio" name="premiumOption" value="day-three" id="day-three">
-                                        <label for="day-three">Top Post for 7 days</label>
-                                        <span>$50.00</span>
-                                    </li>
-                                    <li class="premium">
-                                        <input type="radio" name="premiumOption" value="day-four" id="day-four">
-                                        <label for="day-four">Daily Bump Up for 7 days</label>
-                                        <span>$100.00</span>
-                                    </li>
-                                </ul>
-                            </div>
                             <div class="checkbox section agreement">
-                                <label for="send">
-                                    <input type="checkbox" name="send" id="send">
-                                    You agree to our <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a> and
-                                    acknowledge that you are the rightful owner of this item and using Jobs to find a
-                                    genuine buyer.
-                                </label>
                                 <button type="submit" class="btn btn-primary">Post Your Job</button>
                             </div>
                         </fieldset>
                     </form>
-                </div>
-
-                <div class="col-lg-4">
-                    <div class="section quick-rules">
-                        <h4>Quick rules</h4>
-                        <p class="lead">Posting an ad on <a href="#">jobs.com</a> is free! However, all ads must follow
-                            our rules:</p>
-                        <ul>
-                            <li>Make sure you post in the correct category.</li>
-                            <li>Do not post the same ad more than once or repost an ad within 48 hours.</li>
-                            <li>Do not upload pictures with watermarks.</li>
-                            <li>Do not post ads containing multiple items unless it's a package deal.</li>
-                            <li>Do not put your email or phone numbers in the title or description.</li>
-                            <li>Make sure you post in the correct category.</li>
-                            <li>Do not post the same ad more than once or repost an ad within 48 hours.</li>
-                            <li>Do not upload pictures with watermarks.</li>
-                            <li>Do not post ads containing multiple items unless it's a package deal.</li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>
@@ -214,7 +98,6 @@
 
 <div th:include="fragments/footer-fragment:: footer"></div>
 <div th:include="fragments/preset-fragment:: preset"></div>
-
 
 <script src="/js/jquery.min.js" type="07348d4a3b97c76a3872dd8e-text/javascript"></script>
 <script src="/js/popper.min.js" type="07348d4a3b97c76a3872dd8e-text/javascript"></script>
@@ -230,17 +113,6 @@
 
 	  ga('create', 'UA-73239902-1', 'auto');
 	  ga('send', 'pageview');
-
-
-
-
-
-
-
-
-
-
-
 </script>
 <script src="/js/rocket-loader.min.js" data-cf-settings="07348d4a3b97c76a3872dd8e-|49" defer=""></script>
 </body>
