@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -48,8 +50,9 @@ public class UserService {
     public User save(User user) {
         if (user.getUserType() == UserType.EMPLOYER) {
             user.setUserType(UserType.EMPLOYER);
-        }else {
-            user.setUserType(UserType.USER);}
+        } else {
+            user.setUserType(UserType.USER);
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
 
@@ -85,5 +88,13 @@ public class UserService {
 
     public List<User> findAll() {
         return userRepository.findAll();
+    }
+
+    public Optional<User> findByToken(String token) {
+        return userRepository.findByToken(token);
+    }
+
+    public User edit(User userFromDb) {
+        return userRepository.save(userFromDb);
     }
 }

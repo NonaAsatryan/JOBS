@@ -2,7 +2,6 @@ package com.example.jobs.controller;
 
 import com.example.jobs.dto.CreateJobRequest;
 import com.example.jobs.entity.Category;
-import com.example.jobs.entity.Company;
 import com.example.jobs.entity.Job;
 import com.example.jobs.entity.User;
 import com.example.jobs.sequrity.CurrentUser;
@@ -11,15 +10,16 @@ import com.example.jobs.service.CompanyService;
 import com.example.jobs.service.JobService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -42,12 +42,23 @@ public class JobController {
     }
 
     @PostMapping("/job/post")
-    public String jobAddPost(@ModelAttribute CreateJobRequest createJobRequest,
-                             @AuthenticationPrincipal CurrentUser currentUser) {
-        User user = currentUser.getUser();
-        Job job = mapper.map(createJobRequest, Job.class);
+    public String jobAddPost(@ModelAttribute @Valid CreateJobRequest createJobRequest,
+                             BindingResult bindingResult,
+                             @ModelAttribute CurrentUser currentUser,
+                             ModelMap map) {
+        if (bindingResult.hasErrors()) {
+            List<String> errors = new ArrayList<>();
+            for (ObjectError allError : bindingResult.getAllErrors()) {
+                errors.add(allError.getDefaultMessage());
+            }
+            map.addAttribute("errors",errors);
+            return "post";
+        } else {
+            User user = currentUser.getUser();
+            Job job = mapper.map(createJobRequest, Job.class);
 
-        jobService.save(job, user, createJobRequest.getCategoryId(), createJobRequest.getCompanyId());
+            jobService.save(job, user, createJobRequest.getCategoryId(), createJobRequest.getCompanyId());
+        }
         return "redirect:/";
     }
 
@@ -70,7 +81,6 @@ public class JobController {
     public String appliedJobPage() {
         return "applied-job";
     }
-
 
 
 }

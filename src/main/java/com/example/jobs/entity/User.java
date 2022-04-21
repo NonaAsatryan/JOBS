@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -29,10 +31,13 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Gender gender;
     private String phone;
-//    private String resume;
+    //    private String resume;
     @Enumerated(EnumType.STRING)
     private UserType userType;
     private String picUrl;
     private String city;
+    private String token;
+    private boolean active;
+    private LocalDateTime tokenCreatedDate;
 
 }
