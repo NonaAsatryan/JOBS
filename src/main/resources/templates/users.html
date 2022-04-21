@@ -4,6 +4,24 @@
     <div th:include="fragments/head-fragment:: head"></div>
 
 </head>
+<style>
+    .pagination {
+        display: inline-block;
+    }
+
+    .pagination a {
+        color: black;
+        float: left;
+        padding: 5px 5px;
+        text-decoration: none;
+    }
+
+    .pagination a.active {
+        background-color: gray;
+        color: white;
+        border-radius: 2px;
+    }
+</style>
 <body>
 
 <header id="header" class="clearfix">
@@ -83,7 +101,7 @@
                 <th>Address</th>
                 <th>action</th>
             </tr>
-            <tr th:each="user:${users}">
+            <tr th:each="user:${users.content}">
                 <td th:text="${user.id}"> </td>
                 <td th:text="${user.name}"></td>
                 <td th:text="${user.surname}"></td>
@@ -94,6 +112,12 @@
                 <td><a th:href="@{'/user/remove/' + ${user.id}}">delete</a></td>
             </tr>
         </table>
+        <div th:if="${users.totalPages > 0}" class="pagination"
+             th:each="pageNumber : ${pageNumbers}">
+            <a th:href="@{/users/(size=${users.size}, page=${pageNumber - 1})}"
+               th:text=${pageNumber}
+               th:class="${pageNumber==users.number + 1} ? active"></a>
+        </div>
 
     </div>
 </section>

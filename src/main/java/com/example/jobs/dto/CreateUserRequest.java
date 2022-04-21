@@ -10,15 +10,16 @@ import javax.validation.constraints.NotEmpty;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateCompanyRequest {
-    private int id;
+public class CreateUserRequest {
 
-    @NotEmpty(message = "name should not be empty")
+    private int id;
+    @NotEmpty(message = "name should be not empty")
     private String name;
-    private String address;
     @Email
     private String email;
-    private String mobileNumber;
-//    private String companyPic;
+    private String phone;
+    private String city;
+    @NotEmpty(message = "password should be not empty")
+    private String password;
 
 }

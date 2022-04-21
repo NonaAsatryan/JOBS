@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <div th:include="fragments/head-fragment:: head"></div>
+
+</head>
+<body>
+
+<div th:include="fragments/menu-fragment:: menu"></div>
+
+<section class="clearfix job-bg  ad-profile-page">
+    <div class="container">
+        <div class="breadcrumb-section">
+            <ol class="breadcrumb">
+                <li><a href="/profileDetails">Home</a></li>
+                <li>Profile Details</li>
+            </ol>
+            <h2 class="title">My Profile</h2>
+        </div>
+        <div class="job-profile section">
+            <div class="user-profile">
+                <div class="user-images">
+                    <img src="/images/user.jpg" alt="User Images" class="img-fluid">
+                </div>
+                <div class="user">
+                    <h2>Hello, <a href="${user.name}"></a></h2>
+                    <!--					<h5>You last logged in at: 10-01-2017 6:40 AM [ USA time (GMT + 6:00hrs)]</h5>-->
+                </div>
+                <div class="favorites-user">
+                    <div class="my-ads">
+                        <a href="/job/appliedJob">29<small>Apply Job</small></a>
+                    </div>
+                    <div class="favorites">
+                        <a href="/bookmark">18<small>Favorites</small></a>
+                    </div>
+                </div>
+            </div>
+            <ul class="user-menu">
+                <li><a th:if="${user.userType==user.userType.USER}" href="/user/profile">Account Info </a></li>
+                <li><a th:if="${user.userType==user.userType.ADMIN}" href="/user/adminProfile">Account Info </a></li>
+                <li><a th:if="${user.userType==user.userType.EMPLOYER}" href="/user/employerProfile">Account Info </a></li>
+                <li><a href="/resume/post">View Resume</a></li>
+                <li><a href="/resume/edit">Edit Resume</a></li>
+                <li class="active"><a href="/profileDetails">Profile Details</a></li>
+                <li><a href="/bookmark">Bookmark</a></li>
+                <li><a href="/job/appliedJob">applied job</a></li>
+                <li><a href="/user/deleteAccount">Close account</a></li>
+            </ul>
+        </div>
+        <div class="profile job-profile">
+            <div class="user-pro-section">
+
+                <div class="profile-details section">
+                    <h2>Profile Details</h2>
+                    <div th:if="${errors != null && !errors.isEmpty()}">
+                        <ul>
+                            <li style="color: red" th:each="error: ${errors}" th:text="${error}"></li>
+                        </ul>
+                    </div>
+                    <form action="/user/update" method="post" enctype="multipart/form-data">
+                        <div class="col-sm-9">
+                            <input th:if="${user != null}" type="hidden" th:value="${user.id}" name="id">
+                        </div>
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input type="text" name="name" th:value="${user == null} ? '' : ${user.name}"
+                                   class="form-control" placeholder="Jhon Doe">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email ID</label>
+                            <input type="email" name="email" th:value="${user == null} ? '' : ${user.email}"
+                                   class="form-control" placeholder="jhondoe@mail.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Mobile</label>
+                            <input type="text" name="phone" th:value="${user == null} ? '' : ${user.phone}"
+                                   class="form-control" placeholder="+213 1234 56789">
+                        </div>
+                        <div class="form-group">
+                            <label>Your City</label>
+                            <select name="city" th:value="${user == null} ? '' : ${user.city}" class="form-control">
+                                <option value="Gyumri">Gyumri</option>
+                                <option value="Yerevan">Yerevan</option>
+                                <option value="Vanadzor">Vanadzor</option>
+                                <option value="Artik">Artik</option>
+                                <option value="Maralik">Maralik</option>
+                            </select>
+                        </div>
+                        <!--						<div class="form-group">-->
+                        <!--							<label>You are a</label>-->
+                        <!--							<select class="form-control">-->
+                        <!--								<option value="#">Employer</option>-->
+                        <!--								<option value="#">Employee</option>-->
+                        <!--							</select>-->
+                        <!--						</div>-->
+
+                        <div class="change-password section">
+                            <h2>Change password</h2>
+                            <div class="form-group">
+                                <label>New password</label>
+                                <input type="password" name="password"
+                                       th:value="${user == null} ? '' : ${user.password}" class="form-control">
+                            </div>
+                        </div>
+                        <input type="submit" value="Update">
+                    </form>
+                </div>
+                <div class="buttons">
+                    <a th:href="@{'/user/edit/'+${user.id}}" class="btn">Edit Profile</a>
+                    <a href="/profileDetails" class="btn cancle">Cancle</a>
+                </div>
+
+                <div class="preferences-settings section">
+                    <h2>Preferences Settings</h2>
+
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="logged">Comments are enabled on my Resume</label>
+                        <label><input type="checkbox" name="receive">I want to receive newsletter.</label>
+                        <label><input type="checkbox" name="want">I want to receive advice on portfolio</label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div th:include="fragments/footer-fragment:: footer"></div>
+<div th:include="fragments/preset-fragment:: preset"></div>
+
+<script src="/js/jquery.min.js" type="3e1bc72b98829f36b4c6a26d-text/javascript"></script>
+<script src="/js/popper.min.js" type="3e1bc72b98829f36b4c6a26d-text/javascript"></script>
+<script src="/js/bootstrap.min.js" type="3e1bc72b98829f36b4c6a26d-text/javascript"></script>
+<script src="/js/price-range.js" type="3e1bc72b98829f36b4c6a26d-text/javascript"></script>
+<script src="/js/main.js" type="3e1bc72b98829f36b4c6a26d-text/javascript"></script>
+<script src="/js/switcher.js" type="3e1bc72b98829f36b4c6a26d-text/javascript"></script>
+<script type="3e1bc72b98829f36b4c6a26d-text/javascript">
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-73239902-1', 'auto');
+	  ga('send', 'pageview');
+
+
+</script>
+<script src="/js/rocket-loader.min.js" data-cf-settings="3e1bc72b98829f36b4c6a26d-|49" defer=""></script>
+</body>
+</html>

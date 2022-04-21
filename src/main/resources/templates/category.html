@@ -17,80 +17,34 @@
             </ol>
             <h2 class="title">My Profile</h2>
         </div>
-        <div>
-            <div class="page" >
-                <div class="container">
-                    <div class="section category-items job-category-items  text-center">
-                        <ul class="category-list">
-                            <li class="category-item">
-                                <a href="#">
-                                    <a href="/category/save"></a>
-                                    <a th:each="category:${categories}">
-                                    <div class="category-icon"><img th:if="${category.picture!=null}" th:src="@{/getCategoryPic(picName=${category.picture})}" alt="images" class="img-fluid"></div>
-                                    <span class="category-title" th:text="${category.name}"></span>
-                                    <a class="category-quantity" th:href="@{'/category/delete/' + ${category.id}}">delete</a>
-                                    <a class="category-quantity" th:href="@{'/category/edit/' + ${category.id}}">edit</a>
-                                </a>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-<!--            <a href="/category/save"></a><br>-->
-<!--            <a th:each="category:${categories}" th:href="@{'/categories' + ${category.id}}">-->
-<!--                <div style="width: 105px; float: left">-->
-<!--                    <div>-->
-<!--                        <img th:if="${category.picture!=null}" th:src="@{/getCategoryPic(picName=${category.picture})}" width="100"/>-->
-<!--&lt;!&ndash;                        <img th:if="${category.picture==null}" src="/img.png" width="100"/>&ndash;&gt;-->
-
-<!--                    </div>-->
-<!--                    <div>-->
-<!--                        <span th:text="${category.name}"></span>-->
-<!--                        <span th:text="${category.id}" ></span>-->
-<!--                        <span th:href="@{'/category/delete/' + ${category.id}}">delete</span>-->
-<!--                        <span th:href="@{'/category/edit/' + ${category.id}}">edit</span>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </a>-->
-
-<!--        </div>-->
-<!--        <div class="job-profile section">-->
-<!--            <div class="user-profile">-->
-<!--                <div class="user-images">-->
-<!--                    <img th:if="${currentUser.user.picUrl != null && !currentUser.user.picUrl.isEmpty()}"-->
-<!--                         th:src="@{/getUserImage(picName=${currentUser.user.picUrl})}" alt="User Images"-->
-<!--                         class="img-fluid">-->
-<!--                    <img th:if="${currentUser.user.picUrl== null || currentUser.user.picUrl.isEmpty()}"-->
-<!--                         src="/images/user.jpg" alt="User Images" class="img-fluid">-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        <table>-->
-<!--            <tr>-->
-<!--                <th>id</th>-->
-<!--                <th>Company Name*</th>-->
-<!--                <th>Email ID</th>-->
-<!--                <th>Mobile Number</th>-->
-<!--                <th>Address</th>-->
-<!--                <th>action</th>-->
-<!--            </tr>-->
-<!--            <tr th:each="company:${companies}">-->
-<!--                <td th:text="${company.id}"> </td>-->
-<!--                <td th:text="${company.name}"></td>-->
-<!--                <td th:text="${company.email}"></td>-->
-<!--                <td th:text="${company.mobileNumber}"></td>-->
-<!--                <td th:text="${company.address}"></td>-->
-<!--                <td><a th:href="@{'/company/delete/' + ${company.id}}">delete</a> |<a th:href="@{'/company/edit/' + ${company.id}}">edit</a>  </td>-->
-<!--            </tr>-->
-<!--        </table>-->
-
     </div>
 </section>
+<div class="page">
+    <div class="container">
+        <div class="section category-items job-category-items  text-center">
+            <ul class="category-list">
+
+                <a href="#">
+                    <a href="/category/save"></a>
+                    <a th:each="category:${categories}">
+                        <li class="category-item">
+                            <div class="category-icon"><img th:if="${category.picture!=null}"
+                                                            th:src="@{/getCategoryPic(picName=${category.picture})}"
+                                                            alt="images" class="img-fluid"></div>
+                            <span class="category-title" th:text="${category.name}"></span>
+                            <a class="category-quantity" th:href="@{'/category/delete/' + ${category.id}}">delete</a>
+                            <a class="category-quantity"
+                               th:href="@{'/category/edit/' + ${category.id}}">edit</a>
+                        </li>
+                    </a>
+                </a>
+
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+
 
 <div th:include="fragments/footer-fragment:: footer"></div>
 <div th:include="fragments/preset-fragment:: preset"></div>
@@ -111,6 +65,10 @@
 
 	  ga('create', 'UA-73239902-1', 'auto');
 	  ga('send', 'pageview');
+
+
+
+
 
 
 

@@ -3,12 +3,14 @@ package com.example.jobs.service;
 import com.example.jobs.entity.User;
 import com.example.jobs.entity.UserType;
 import com.example.jobs.repository.UserRepository;
+import com.example.jobs.sequrity.CurrentUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -83,7 +85,12 @@ public class UserService {
         return null;
     }
 
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public Page<User> findAll(Pageable pageable) {
+
+        return userRepository.findAll(pageable);
+    }
+
+    public User getById(int id) {
+        return userRepository.getById(id);
     }
 }
