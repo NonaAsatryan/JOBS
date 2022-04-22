@@ -5,6 +5,8 @@ import com.example.jobs.entity.UserType;
 import com.example.jobs.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -96,5 +98,14 @@ public class UserService {
 
     public User edit(User userFromDb) {
         return userRepository.save(userFromDb);
+    }
+
+    public Page<User> findAll(Pageable pageable) {
+
+        return userRepository.findAll(pageable);
+    }
+
+    public User getById(int id) {
+        return userRepository.getById(id);
     }
 }

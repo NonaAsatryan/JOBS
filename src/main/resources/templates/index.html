@@ -43,97 +43,119 @@
             <li><a href="#" title="Youtube"><i class="fa fa-youtube"></i></a></li>
         </ul>
     </div>
-</div>
-<div class="page">
-    <div class="container">
-        <div class="section category-items job-category-items  text-center">
-            <ul class="category-list">
-                <li class="category-item">
+    <div class="page" >
+        <div class="container">
+            <div class="section category-items job-category-items  text-center">
+                <ul class="category-list">
+
                     <a href="#">
-                        <div class="category-icon"><img src="/images/icon/1.png" alt="images" class="img-fluid"></div>
-                        <span class="category-title">Accounting/Finance</span>
-                        <span class="category-quantity">(1298)</span>
+                        <a href="/category/save"></a>
+                        <a th:each="category:${categories}">
+                            <li class="category-item">
+                                <div class="category-icon"><img th:if="${category.picture!=null}" th:src="@{/getCategoryPic(picName=${category.picture})}" alt="images" class="img-fluid"></div>
+                                <span class="category-title" th:text="${category.name}"></span>
+<!--                                <a class="category-quantity" th:href="@{'/category/delete/' + ${category.id}}">delete</a>-->
+<!--                                <a class="category-quantity" th:href="@{'/category/edit/' + ${category.id}}">edit</a>-->
+                            </li>
+                        </a>
                     </a>
-                </li>
-                <li class="category-item">
-                    <a href="#">
-                        <div class="category-icon"><img src="/images/icon/2.png" alt="images" class="img-fluid"></div>
-                        <span class="category-title">Education/Training</span>
-                        <span class="category-quantity">(76212)</span>
-                    </a>
-                </li>
-                <li class="category-item">
-                    <a href="#">
-                        <div class="category-icon"><img src="/images/icon/3.png" alt="images" class="img-fluid"></div>
-                        <span class="category-title">Engineer/Architects</span>
-                        <span class="category-quantity">(212)</span>
-                    </a>
-                </li>
-                <li class="category-item">
-                    <a href="#">
-                        <div class="category-icon"><img src="/images/icon/4.png" alt="images" class="img-fluid"></div>
-                        <span class="category-title">Garments/Textile</span>
-                        <span class="category-quantity">(972)</span>
-                    </a>
-                </li>
-                <li class="category-item">
-                    <a href="#">
-                        <div class="category-icon"><img src="/images/icon/5.png" alt="images" class="img-fluid"></div>
-                        <span class="category-title">HR/Org. Development</span>
-                        <span class="category-quantity">(1298)</span>
-                    </a>
-                </li>
-                <li class="category-item">
-                    <a href="#">
-                        <div class="category-icon"><img src="/images/icon/6.png" alt="images" class="img-fluid"></div>
-                        <span class="category-title">Design/Creative</span>
-                        <span class="category-quantity">(76212)</span>
-                    </a>
-                </li>
-                <li class="category-item">
-                    <a href="#">
-                        <div class="category-icon"><img src="/images/icon/7.png" alt="images" class="img-fluid"></div>
-                        <span class="category-title">Research/Consultancy</span>
-                        <span class="category-quantity">(1298)</span>
-                    </a>
-                </li>
-                <li class="category-item">
-                    <a href="#">
-                        <div class="category-icon"><img src="/images/icon/8.png" alt="images" class="img-fluid"></div>
-                        <span class="category-title">Medical/Pharma</span>
-                        <span class="category-quantity">(76212)</span>
-                    </a>
-                </li>
-                <li class="category-item">
-                    <a href="#">
-                        <div class="category-icon"><img src="/images/icon/9.png" alt="images" class="img-fluid"></div>
-                        <span class="category-title">Music & Arts</span>
-                        <span class="category-quantity">(212)</span>
-                    </a>
-                </li>
-                <li class="category-item">
-                    <a href="#">
-                        <div class="category-icon"><img src="/images/icon/10.png" alt="images" class="img-fluid"></div>
-                        <span class="category-title">Marketing/Sales</span>
-                        <span class="category-quantity">(1298)</span>
-                    </a>
-                </li>
-                <li class="category-item">
-                    <a href="#">
-                        <div class="category-icon"><img src="/images/icon/11.png" alt="images" class="img-fluid"></div>
-                        <span class="category-title">Production/Operation</span>
-                        <span class="category-quantity">(124)</span>
-                    </a>
-                </li>
-                <li class="category-item">
-                    <a href="#">
-                        <div class="category-icon"><img src="/images/icon/12.png" alt="images" class="img-fluid"></div>
-                        <span class="category-title">Miscellaneous</span>
-                        <span class="category-quantity">(972)</span>
-                    </a>
-                </li>
-            </ul>
+
+                </ul>
+            </div>
         </div>
+    </div>
+</div>
+<!--</div>-->
+<!--<div class="page">-->
+<!--    <div class="container">-->
+<!--        <div class="section category-items job-category-items  text-center">-->
+<!--            <ul class="category-list">-->
+<!--                <li class="category-item">-->
+<!--                    <a href="#">-->
+<!--                        <div class="category-icon"><img src="/images/icon/1.png" alt="images" class="img-fluid"></div>-->
+<!--                        <span class="category-title">Accounting/Finance</span>-->
+<!--                        <span class="category-quantity">(1298)</span>-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--                <li class="category-item">-->
+<!--                    <a href="#">-->
+<!--                        <div class="category-icon"><img src="/images/icon/2.png" alt="images" class="img-fluid"></div>-->
+<!--                        <span class="category-title">Education/Training</span>-->
+<!--                        <span class="category-quantity">(76212)</span>-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--                <li class="category-item">-->
+<!--                    <a href="#">-->
+<!--                        <div class="category-icon"><img src="/images/icon/3.png" alt="images" class="img-fluid"></div>-->
+<!--                        <span class="category-title">Engineer/Architects</span>-->
+<!--                        <span class="category-quantity">(212)</span>-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--                <li class="category-item">-->
+<!--                    <a href="#">-->
+<!--                        <div class="category-icon"><img src="/images/icon/4.png" alt="images" class="img-fluid"></div>-->
+<!--                        <span class="category-title">Garments/Textile</span>-->
+<!--                        <span class="category-quantity">(972)</span>-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--                <li class="category-item">-->
+<!--                    <a href="#">-->
+<!--                        <div class="category-icon"><img src="/images/icon/5.png" alt="images" class="img-fluid"></div>-->
+<!--                        <span class="category-title">HR/Org. Development</span>-->
+<!--                        <span class="category-quantity">(1298)</span>-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--                <li class="category-item">-->
+<!--                    <a href="#">-->
+<!--                        <div class="category-icon"><img src="/images/icon/6.png" alt="images" class="img-fluid"></div>-->
+<!--                        <span class="category-title">Design/Creative</span>-->
+<!--                        <span class="category-quantity">(76212)</span>-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--                <li class="category-item">-->
+<!--                    <a href="#">-->
+<!--                        <div class="category-icon"><img src="/images/icon/7.png" alt="images" class="img-fluid"></div>-->
+<!--                        <span class="category-title">Research/Consultancy</span>-->
+<!--                        <span class="category-quantity">(1298)</span>-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--                <li class="category-item">-->
+<!--                    <a href="#">-->
+<!--                        <div class="category-icon"><img src="/images/icon/8.png" alt="images" class="img-fluid"></div>-->
+<!--                        <span class="category-title">Medical/Pharma</span>-->
+<!--                        <span class="category-quantity">(76212)</span>-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--                <li class="category-item">-->
+<!--                    <a href="#">-->
+<!--                        <div class="category-icon"><img src="/images/icon/9.png" alt="images" class="img-fluid"></div>-->
+<!--                        <span class="category-title">Music & Arts</span>-->
+<!--                        <span class="category-quantity">(212)</span>-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--                <li class="category-item">-->
+<!--                    <a href="#">-->
+<!--                        <div class="category-icon"><img src="/images/icon/10.png" alt="images" class="img-fluid"></div>-->
+<!--                        <span class="category-title">Marketing/Sales</span>-->
+<!--                        <span class="category-quantity">(1298)</span>-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--                <li class="category-item">-->
+<!--                    <a href="#">-->
+<!--                        <div class="category-icon"><img src="/images/icon/11.png" alt="images" class="img-fluid"></div>-->
+<!--                        <span class="category-title">Production/Operation</span>-->
+<!--                        <span class="category-quantity">(124)</span>-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--                <li class="category-item">-->
+<!--                    <a href="#">-->
+<!--                        <div class="category-icon"><img src="/images/icon/12.png" alt="images" class="img-fluid"></div>-->
+<!--                        <span class="category-title">Miscellaneous</span>-->
+<!--                        <span class="category-quantity">(972)</span>-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </div>-->
         <div class="section latest-jobs-ads">
             <div class="section-title tab-manu">
                 <h4>Latest Jobs</h4>

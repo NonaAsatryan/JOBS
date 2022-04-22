@@ -23,17 +23,19 @@
                 <div class="container">
                     <div class="section category-items job-category-items  text-center">
                         <ul class="category-list">
-                            <li class="category-item">
+
                                 <a href="#">
                                     <a href="/category/save"></a>
                                     <a th:each="category:${categories}">
+                                        <li class="category-item">
                                     <div class="category-icon"><img th:if="${category.picture!=null}" th:src="@{/getCategoryPic(picName=${category.picture})}" alt="images" class="img-fluid"></div>
                                     <span class="category-title" th:text="${category.name}"></span>
                                     <a class="category-quantity" th:href="@{'/category/delete/' + ${category.id}}">delete</a>
                                     <a class="category-quantity" th:href="@{'/category/edit/' + ${category.id}}">edit</a>
+                                        </li>
                                 </a>
                                 </a>
-                            </li>
+
                         </ul>
                     </div>
                 </div>

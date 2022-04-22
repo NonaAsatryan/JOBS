@@ -1,5 +1,6 @@
 package com.example.jobs.controller;
 
+import com.example.jobs.dto.CreateUserRequest;
 import com.example.jobs.entity.Resume;
 import com.example.jobs.entity.User;
 import com.example.jobs.entity.UserType;
@@ -9,23 +10,29 @@ import com.example.jobs.service.ResumeService;
 import com.example.jobs.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.IOUtils;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.mail.MessagingException;
+import javax.validation.Valid;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @RequiredArgsConstructor
@@ -36,7 +43,7 @@ public class UserController {
 
     private final ResumeService resumeService;
     private final MailService mailService;
-
+    private final ModelMapper mapper;
 
     @Value("${images.upload.path}")
     public String imagePath;
@@ -64,8 +71,8 @@ public class UserController {
         userService.saveUserImage(uploadedImageFile, user);
 //        userService.saveResumeFile(uploadedFile, user);
 
-        mailService.sendHtmlEmail(user.getEmail(), "Welcome"+user.getSurname(),user,
-                        "  http://localhost:8080/user/activate?token=" + user.getToken(),"verify_template",locale);
+        mailService.sendHtmlEmail(user.getEmail(), "Welcome" + user.getSurname(), user,
+                "  http://localhost:8080/user/activate?token=" + user.getToken(), "verify_template", locale);
 
         return "redirect:/user/login";
     }
@@ -172,10 +179,50 @@ public class UserController {
         return "employer-profile";
     }
 
-
     @GetMapping("/user/profileDetails")
-    public String profileDetailsPage() {
-        return "profileDetails";
+    public String profileDetailsPage(@ModelAttribute CurrentUser currentUser, ModelMap map) {
+        User user = userService.getById(currentUser.getUser().getId());
+        map.addAttribute("user", user);
+        return "profile-details";
+    }
+
+    @PostMapping("/user/update")
+    public String updateUserProfile(@ModelAttribute @Valid CreateUserRequest createUserRequest,
+                                    BindingResult bindingResult,
+                                    @ModelAttribute CurrentUser currentUser, ModelMap map) {
+
+        if (bindingResult.hasErrors()) {
+            List<String> errors = new ArrayList<>();
+            for (ObjectError allError : bindingResult.getAllErrors()) {
+                errors.add(allError.getDefaultMessage());
+            }
+            map.addAttribute("errors", errors);
+//            map.addAttribute("categories", categoryService.findAll());
+            return "profile-details";
+        } else {
+            User user = mapper.map(createUserRequest, User.class);
+            userService.save(user);
+//            User user = currentUser.getUser();
+            if (user.getUserType() == UserType.ADMIN) {
+                return "redirect:/user/adminProfile";
+            }
+            if (user.getUserType() == UserType.EMPLOYER) {
+                return "redirect:/user/employerProfile";
+            } else {
+                return "redirect:/user/profile";
+            }
+
+//            return "redirect:/profile";
+        }
+    }
+
+    @GetMapping("/user/edit/{id}")
+    public String editProfileDetails(ModelMap map,
+                                     @PathVariable("id") int id) {
+        map.addAttribute("user", userService.getById(id));
+
+        return "profile-details";
+
     }
 
     @GetMapping("/bookmark")
@@ -190,11 +237,21 @@ public class UserController {
 
     }
 
-    @GetMapping("/users")
-    public String usersPage(@ModelAttribute CurrentUser currentUser, ModelMap map) {
-        List<User> users = userService.findAll();
+    @GetMapping("/users/")
+    public String usersPage(@ModelAttribute CurrentUser currentUser,
+                            @RequestParam(value = "page", defaultValue = "0") int page,
+                            @RequestParam(value = "size", defaultValue = "2") int size, ModelMap map) {
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by("name"));
+        Page<User> users = userService.findAll(pageRequest);
         map.addAttribute("users", users);
+        int totalPages = users.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            map.addAttribute("pageNumbers", pageNumbers);
+        }
         return "users";
-    }
 
+    }
 }

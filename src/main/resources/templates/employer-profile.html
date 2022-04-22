@@ -19,17 +19,17 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="nav navbar-nav">
                     <li><a href="/">Home</a></li>
-                    <li><a href="job-list.html">Job list</a></li>
+                    <li><a href="/job/jobList">Job list</a></li>
                     <li><a href="details.html">Job Details</a></li>
                     <li><a href="/resume">Resume</a></li>
                     <li class="dropdown active"><a href="javascript:void(0);" class="dropdown-toggle"
                                                    data-toggle="dropdown">Pages<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li class="active"><a href="/user/profile">profile</a></li>
+                            <li class="active"><a href="/user/employerProfile">profile</a></li>
                             <!--                            <li><a href="/resume/post">Post Resume</a></li>-->
                             <li><a href="/job/post">Job Post</a></li>
                             <!--                            <li><a href="/resume/edit">Edit Resume</a></li>-->
-                            <li><a href="profileDetails.html">profile Details</a></li>
+                            <li><a href="/profileDetails">profile Details</a></li>
                             <li><a href="bookmark.html">Bookmark</a></li>
                             <li><a href="applied-job.html">Applied Job</a></li>
                             <li><a href="/user/deleteAccount">Close Account</a></li>
@@ -111,8 +111,11 @@
                 <li><a href="/user/deleteAccount">Close account</a></li>
             </ul>
         </div>
-
-
+        <div th:if="${errors != null && !errors.isEmpty()}">
+            <ul>
+                <li style="color: red" th:each="error: ${errors}" th:text="${error}"></li>
+            </ul>
+        </div>
         <form action="/company/save" method="post" enctype="multipart/form-data">
             <div class="section company-information">
                 <h4>Company Information</h4>

@@ -5,6 +5,24 @@
     <div th:include="fragments/head-fragment:: head"></div>
 
 </head>
+<style>
+    .pagination {
+        display: inline-block;
+    }
+
+    .pagination a {
+        color: black;
+        float: left;
+        padding: 5px 5px;
+        text-decoration: none;
+    }
+
+    .pagination a.active {
+        background-color: gray;
+        color: white;
+        border-radius: 2px;
+    }
+</style>
 <body>
 
 <header id="header" class="clearfix">
@@ -21,14 +39,14 @@
                     <li><a href="/">Home</a></li>
                     <li><a href="/job/jobList">Job list</a></li>
                     <li><a href="details.html">Job Details</a></li>
-<!--                    <li><a href="/resume">Resume</a></li>-->
+                    <!--                    <li><a href="/resume">Resume</a></li>-->
                     <li class="dropdown active"><a href="javascript:void(0);" class="dropdown-toggle"
                                                    data-toggle="dropdown">Pages<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li class="active"><a href="/user/adminProfile">profile</a></li>
-<!--                            <li><a href="/resume/post">Post Resume</a></li>-->
-<!--                            <li><a href="/job/post">Job Post</a></li>-->
-<!--                            <li><a href="/resume/edit">Edit Resume</a></li>-->
+                            <!--                            <li><a href="/resume/post">Post Resume</a></li>-->
+                            <!--                            <li><a href="/job/post">Job Post</a></li>-->
+                            <!--                            <li><a href="/resume/edit">Edit Resume</a></li>-->
                             <li><a href="/profileDetails">profile Details</a></li>
                             <li><a href="/bookmark">Bookmark</a></li>
                             <li><a href="applied-job.html">Applied Job</a></li>
@@ -64,13 +82,13 @@
         </div>
         <div class="job-profile section">
             <div class="user-profile">
-<!--                <div class="user-images">-->
-<!--                    <img th:if="${currentUser.user.picUrl != null && !currentUser.user.picUrl.isEmpty()}"-->
-<!--                         th:src="@{/getUserImage(picName=${currentUser.user.picUrl})}" alt="User Images"-->
-<!--                         class="img-fluid">-->
-<!--                    <img th:if="${currentUser.user.picUrl== null || currentUser.user.picUrl.isEmpty()}"-->
-<!--                         src="/images/user.jpg" alt="User Images" class="img-fluid">-->
-<!--                </div>-->
+                <!--                <div class="user-images">-->
+                <!--                    <img th:if="${currentUser.user.picUrl != null && !currentUser.user.picUrl.isEmpty()}"-->
+                <!--                         th:src="@{/getUserImage(picName=${currentUser.user.picUrl})}" alt="User Images"-->
+                <!--                         class="img-fluid">-->
+                <!--                    <img th:if="${currentUser.user.picUrl== null || currentUser.user.picUrl.isEmpty()}"-->
+                <!--                         src="/images/user.jpg" alt="User Images" class="img-fluid">-->
+                <!--                </div>-->
             </div>
         </div>
         <table>
@@ -84,8 +102,8 @@
                 <th>Address</th>
                 <th>action</th>
             </tr>
-            <tr th:each="user:${users}">
-                <td th:text="${user.id}"> </td>
+            <tr th:each="user:${users.content}">
+                <td th:text="${user.id}"></td>
                 <td th:text="${user.name}"></td>
                 <td th:text="${user.surname}"></td>
                 <td th:text="${user.email}"></td>
@@ -95,6 +113,12 @@
                 <td><a th:href="@{'/user/remove/' + ${user.id}}">delete</a></td>
             </tr>
         </table>
+        <div th:if="${users.totalPages > 0}" class="pagination"
+             th:each="pageNumber : ${pageNumbers}">
+            <a th:href="@{/users/(size=${users.size}, page=${pageNumber - 1})}"
+               th:text="${pageNumber}"
+               th:class="${pageNumber==users.number + 1} ? active"></a>
+        </div>
 
     </div>
 </section>
@@ -117,6 +141,7 @@
 
 	  ga('create', 'UA-73239902-1', 'auto');
 	  ga('send', 'pageview');
+
 </script>
 <script src="/js/rocket-loader.min.js" data-cf-settings="3b6400457e787a6cd52a0e00-|49" defer=""></script>
 </body>
