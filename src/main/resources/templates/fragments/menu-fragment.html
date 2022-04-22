@@ -18,22 +18,22 @@
                 <a class="navbar-brand" href="/"><img class="img-fluid" src="/images/logo.png" alt="Logo"></a>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="/">Home</a></li>
-                        <li><a href="/job/jobList">Job list</a></li>
-                        <li><a href="/job/details">Job Details</a></li>
-                        <li><a href="/resume">Resume</a></li>
-                        <li class="dropdown"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Pages<span class="caret"></span></a>
+                        <li class="active"><a href="/" th:text="#{main.home}">Home</a></li>
+                        <li><a href="/job/jobList" th:text="#{main.job.list}">Job list</a></li>
+                        <li><a href="/job/details" th:text="#{main.job.details}">Job Details</a></li>
+                        <li><a href="/resume" th:text="#{main.view.resume}">Resume</a></li>
+                        <li class="dropdown"><a href="javascript:void(0);" th:text="#{main.pages}" class="dropdown-toggle" data-toggle="dropdown">Pages<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/user/profile">Profile</a></li>
-                                <li><a href="/resume/post">Post Resume</a></li>
-                                <li><a href="/job/post">Job Post</a></li>
-                                <li><a href="/resume/edit">Edit Resume</a></li>
-                                <li><a href="/user/profileDetails">profile Details</a></li>
-                                <li><a href="/bookmark">Bookmark</a></li>
-                                <li><a href="/job/appliedJob">Applied Job</a></li>
-                                <li><a href="/user/deleteAccount">Close Account</a></li>
-                                <li><a href="/user/register">Job Signup</a></li>
-                                <li><a href="/user/login">Job Signin</a></li>
+                                <li><a href="/user/profile" th:text="#{main.profile}">Profile</a></li>
+                                <li><a href="/resume/post" th:text="#{main.post.resume}">Post Resume</a></li>
+                                <li><a href="/job/post" th:text="#{main.post.job}">Job Post</a></li>
+                                <li><a href="/resume/edit" th:text="#{main.edit.resume}">Edit Resume</a></li>
+                                <li><a href="/user/profileDetails" th:text="#{main.profile.details}">profile Details</a></li>
+<!--                                <li><a href="/bookmark">Bookmark</a></li>-->
+<!--                                <li><a href="/job/appliedJob">Applied Job</a></li>-->
+                                <li><a href="/user/deleteAccount" th:text="#{main.delete.account}">Close Account</a></li>
+                                <li><a href="/user/register" th:text="#{main.signup}">Job Signup</a></li>
+                                <li><a href="/user/login" th:text="#{main.signin}">Job Signin</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -42,10 +42,12 @@
                 <div class="nav-right">
                     <ul class="sign-in">
                         <li><i class="fa fa-user"></i></li>
-                        <li><a href="/user/login">Sign In</a></li>
-                        <li><a href="/user/register">Register</a></li>
+                        <li><a href="/user/login" th:text="#{main.signin}">Sign In/</a></li>
+                        <li><a href="/logout" th:text="#{main.logout}">Logout</a></li>
+                        <li><a href="/user/register" th:text="#{main.signup}">Register</a></li>
                     </ul>
-                    <a href="/job/post" class="btn">Post Your Job</a>
+                    <a href="/job/post" th:text="#{main.post.job}"class="btn">Post Your Job</a><br>
+                    <a href="?lang=hy">Armenian</a> | <a href="?lang=ru">Russian</a> | <a href="?lang=en">English</a>
                 </div>
 
             </div>
