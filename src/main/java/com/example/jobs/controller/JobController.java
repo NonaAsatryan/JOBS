@@ -9,6 +9,7 @@ import com.example.jobs.service.CategoryService;
 import com.example.jobs.service.CompanyService;
 import com.example.jobs.service.JobService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,6 +25,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class JobController {
 
     private final JobService jobService;
@@ -51,11 +53,13 @@ public class JobController {
             for (ObjectError allError : bindingResult.getAllErrors()) {
                 errors.add(allError.getDefaultMessage());
             }
-            map.addAttribute("errors",errors);
+            log.error("You have unfilled fields");
+            map.addAttribute("errors", errors);
             return "post";
         } else {
             User user = currentUser.getUser();
             Job job = mapper.map(createJobRequest, Job.class);
+            log.info("User with email: {}  is login and created a job", user.getEmail());
 
             jobService.save(job, user, createJobRequest.getCategoryId(), createJobRequest.getCompanyId());
         }
