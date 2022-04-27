@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -31,7 +32,10 @@ public class JobService {
     }
 
     public void deleteById(int id) {
-        jobRepository.deleteById(id);
+        Optional<Job> byId = jobRepository.findById(id);
+        if (byId.isPresent()) {
+            jobRepository.deleteById(id);
+        }
     }
 
     public Job findById(int id) {
@@ -40,5 +44,9 @@ public class JobService {
 
     public Page<Job> findAll(Pageable pageable) {
         return jobRepository.findAll(pageable);
+    }
+
+    public List<Job> findAll() {
+        return jobRepository.findAll();
     }
 }
