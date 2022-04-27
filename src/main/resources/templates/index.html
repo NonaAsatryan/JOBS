@@ -165,14 +165,14 @@
                     <tr>
                         <th>company</th>
                         <th>city</th>
-                        <th>getJobType</th>
+                        <th>JobType</th>
                         <th>salary</th>
                         <th>name</th>
                     </tr>
                     <tr>
                         <td th:text="${job.company.name}"></td>
                         <td th:text="${job.company.city}"></td>
-                        <td th:text="${job.getJobType()}"></td>
+                        <td th:text="${job.jobType.name}"></td>
                         <td th:text="${job.salary}"></td>
                         <td th:text="${job.name}"></td>
                     </tr>

@@ -2,7 +2,7 @@ package com.example.jobs.entity;
 
 public enum JobType {
 
-    FULL_TIME,
+    FUll_TIME,
     PART_TIME,
     FREELANCE,
     CONTRACT

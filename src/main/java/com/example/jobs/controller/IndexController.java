@@ -25,20 +25,20 @@ public class IndexController {
 
 
     @GetMapping("/")
-    public String main(ModelMap map, @RequestParam(value = "page",defaultValue = "0") int page,
-                       @RequestParam(value = "size",defaultValue = "3") int size) {
+    public String main(ModelMap map, @RequestParam(value = "page", defaultValue = "0") int page,
+                       @RequestParam(value = "size", defaultValue = "3") int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
 
         List<Category> categories = categoryService.findAll();
         map.addAttribute("categories", categories);
         Page<Job> jobPage = jobService.findAll(pageRequest);
         map.addAttribute("jobPage", jobPage);
-        int totalPages=jobPage.getTotalPages();
-        if (totalPages>0){
-            List<Integer> pageNumbers= IntStream.rangeClosed(1,totalPages)
+        int totalPages = jobPage.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
                     .boxed()
                     .collect(Collectors.toList());
-            map.addAttribute("pageNumbers",pageNumbers);
+            map.addAttribute("pageNumbers", pageNumbers);
         }
         return "index";
     }
