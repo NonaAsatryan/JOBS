@@ -7,6 +7,8 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
+import java.time.Duration;
+import java.time.LocalTime;
 import java.util.Arrays;
 
 @Component
@@ -20,21 +22,28 @@ public class LoggingAspect {
 
     @Around("springBeanPointcut()")
     public Object logAround(ProceedingJoinPoint joinPoint) {
-        long startTime = 0;
+        LocalTime startTime = null;
         if (log.isDebugEnabled()) {
-            startTime = System.currentTimeMillis();
+            startTime = LocalTime.now();
+            log.info("Started time: " + startTime);
             log.debug("Enter: {}.{}({})", joinPoint.getSignature().getDeclaringTypeName(),
                     joinPoint.getSignature().getName(),
                     Arrays.toString(joinPoint.getArgs()));
         }
         try {
             Object result = joinPoint.proceed();
+            LocalTime endTime = null;
 
             if (log.isDebugEnabled()) {
-                long endTime = System.currentTimeMillis();
+                endTime = LocalTime.now();
+                log.info("Stopped time: " + endTime);
+
                 log.debug("Enter: {}.{}({})", joinPoint.getSignature().getDeclaringTypeName(), joinPoint.getSignature().getName(), result);
                 log.debug("{} took {}ms time to execute{}", joinPoint.getSignature().getName(), endTime, joinPoint.getKind());
 
+            }
+            if (startTime!=null && endTime!=null){
+                Duration.between(startTime,endTime).getSeconds();
             }
             return result;
         } catch (IllegalArgumentException e) {
