@@ -82,19 +82,19 @@ public class UserController {
         Optional<User> user = userService.findByToken(token);
         if (!user.isPresent()) {
             map.addAttribute("message", "User does not exists");
-            return "activate_user";
+            return "activate-user";
         }
         User userFromDb = user.get();
         if (userFromDb.isActive()) {
             map.addAttribute("message", "User already active! ");
-            return "activate_user";
+            return "activate-user";
         }
         userFromDb.setActive(true);
         userFromDb.setToken(null);
         userFromDb.setTokenCreatedDate(null);
         userService.edit(userFromDb);
         map.addAttribute("message", "User activate, please login!");
-        return "activate_user";
+        return "activate-user";
     }
 
     @PostMapping("/user/employerRegister")

@@ -14,10 +14,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -33,13 +30,11 @@ public class JobController {
     private final CompanyService companyService;
     private final ModelMapper mapper;
 
-
     @GetMapping("/job/post")
     public String postPage(ModelMap map) {
         List<Category> categoryList = categoryService.findAll();
         map.addAttribute("categoryList", categoryList);
         map.addAttribute("companies", companyService.findAll());
-
         return "post";
     }
 
@@ -50,9 +45,7 @@ public class JobController {
                              ModelMap map) {
         if (bindingResult.hasErrors()) {
             List<String> errors = new ArrayList<>();
-            for (ObjectError allError : bindingResult.getAllErrors()) {
-                errors.add(allError.getDefaultMessage());
-            }
+            bindingResult.getAllErrors().forEach(allError -> errors.add(allError.getDefaultMessage()));
             log.error("You have unfilled fields");
             map.addAttribute("errors", errors);
             return "post";
@@ -71,14 +64,22 @@ public class JobController {
         return "details";
     }
 
-    @GetMapping("/job/jobDetails")
-    public String jobDetailsPage() {
-        return "job-details";
+    @GetMapping("/job/jobList/{keyword}")
+    public String jobListPage(@RequestParam String keyword, ModelMap map) {
+        List<Job> jobList = jobService.search(keyword);
+        map.addAttribute("jobList", jobList);
+        return "job-list";
     }
 
-    @GetMapping("/job/jobList")
-    public String jobListPage() {
-        return "job-list";
+    @GetMapping("/job/jobDetails/{id}")
+    public String jobDetailsPage(@PathVariable("id") int id, ModelMap map) {
+        Job byId = jobService.getById(id);
+        if (byId != null) {
+            map.addAttribute("byId", byId);
+            return "job-details";
+        } else {
+            return "redirect:/";
+        }
     }
 
     @GetMapping("/job/appliedJob")
@@ -86,5 +87,15 @@ public class JobController {
         return "applied-job";
     }
 
-
+    @GetMapping("/editJob/{id}")
+    public String updateJob(@ModelAttribute CreateJobRequest createJobRequest,ModelMap map, @PathVariable("id") int id,
+                            @ModelAttribute CurrentUser currentUser) {
+        Job job = mapper.map(createJobRequest, Job.class);
+        if (job != null) {
+            jobService.updateJob(job,id,currentUser.getUser());
+            return "employer-profile";
+        } else {
+            return "redirect:/";
+        }
+    }
 }
