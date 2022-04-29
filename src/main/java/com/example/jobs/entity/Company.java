@@ -23,4 +23,6 @@ public class Company {
     private String address;
     private String email;
     private String mobileNumber;
+    private String picUrl;
+
 }

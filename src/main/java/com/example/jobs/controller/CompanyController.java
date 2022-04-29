@@ -6,17 +6,22 @@ import com.example.jobs.sequrity.CurrentUser;
 import com.example.jobs.service.CategoryService;
 import com.example.jobs.service.CompanyService;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.IOUtils;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +31,9 @@ public class CompanyController {
     private final CompanyService companyService;
     private final CategoryService categoryService;
     private final ModelMapper mapper;
+
+    @Value("${company.upload.path}")
+    public String imagePath;
 
     @GetMapping("/company/delete/{id}")
     public String deleteCompany(@PathVariable("id") int id) {
@@ -77,6 +85,12 @@ public class CompanyController {
         companyService.findById(id);
         return "job-list";
 
+    }
+    @GetMapping(value = "/getCompanyPic", produces = MediaType.IMAGE_JPEG_VALUE)
+    public @ResponseBody
+    byte[] getImage(@RequestParam("picName") String picName) throws IOException {
+        InputStream inputStream = Files.newInputStream(Paths.get(imagePath + picName));
+        return IOUtils.toByteArray(inputStream);
     }
 
 }

@@ -30,9 +30,9 @@
     <div class="container text-center">
         <h1 class="title">The Easiest Way to Get Your New Job</h1>
         <h3>We offer 12000 jobs vacation right now</h3>
-        <div class="banner-form">
-            <form action="#" class="clearfix">
-                <input type="text" class="form-control" placeholder="Type your key word">
+        <div class="banner-form" >
+            <form action="/job/jobList" class="clearfix">
+                <input th:href="@{'/job/jobList/' + ${keyword}}" type="text" name="keyword" class="form-control" placeholder="Type your key word">
                 <button type="submit" class="btn btn-primary" value="Search">Search</button>
             </form>
         </div>
@@ -64,151 +64,76 @@
             </div>
         </div>
     </div>
-</div>
-<!--</div>-->
-<!--<div class="page">-->
-<!--    <div class="container">-->
-<!--        <div class="section category-items job-category-items  text-center">-->
-<!--            <ul class="category-list">-->
-<!--                <li class="category-item">-->
-<!--                    <a href="#">-->
-<!--                        <div class="category-icon"><img src="/images/icon/1.png" alt="images" class="img-fluid"></div>-->
-<!--                        <span class="category-title">Accounting/Finance</span>-->
-<!--                        <span class="category-quantity">(1298)</span>-->
-<!--                    </a>-->
-<!--                </li>-->
-<!--                <li class="category-item">-->
-<!--                    <a href="#">-->
-<!--                        <div class="category-icon"><img src="/images/icon/2.png" alt="images" class="img-fluid"></div>-->
-<!--                        <span class="category-title">Education/Training</span>-->
-<!--                        <span class="category-quantity">(76212)</span>-->
-<!--                    </a>-->
-<!--                </li>-->
-<!--                <li class="category-item">-->
-<!--                    <a href="#">-->
-<!--                        <div class="category-icon"><img src="/images/icon/3.png" alt="images" class="img-fluid"></div>-->
-<!--                        <span class="category-title">Engineer/Architects</span>-->
-<!--                        <span class="category-quantity">(212)</span>-->
-<!--                    </a>-->
-<!--                </li>-->
-<!--                <li class="category-item">-->
-<!--                    <a href="#">-->
-<!--                        <div class="category-icon"><img src="/images/icon/4.png" alt="images" class="img-fluid"></div>-->
-<!--                        <span class="category-title">Garments/Textile</span>-->
-<!--                        <span class="category-quantity">(972)</span>-->
-<!--                    </a>-->
-<!--                </li>-->
-<!--                <li class="category-item">-->
-<!--                    <a href="#">-->
-<!--                        <div class="category-icon"><img src="/images/icon/5.png" alt="images" class="img-fluid"></div>-->
-<!--                        <span class="category-title">HR/Org. Development</span>-->
-<!--                        <span class="category-quantity">(1298)</span>-->
-<!--                    </a>-->
-<!--                </li>-->
-<!--                <li class="category-item">-->
-<!--                    <a href="#">-->
-<!--                        <div class="category-icon"><img src="/images/icon/6.png" alt="images" class="img-fluid"></div>-->
-<!--                        <span class="category-title">Design/Creative</span>-->
-<!--                        <span class="category-quantity">(76212)</span>-->
-<!--                    </a>-->
-<!--                </li>-->
-<!--                <li class="category-item">-->
-<!--                    <a href="#">-->
-<!--                        <div class="category-icon"><img src="/images/icon/7.png" alt="images" class="img-fluid"></div>-->
-<!--                        <span class="category-title">Research/Consultancy</span>-->
-<!--                        <span class="category-quantity">(1298)</span>-->
-<!--                    </a>-->
-<!--                </li>-->
-<!--                <li class="category-item">-->
-<!--                    <a href="#">-->
-<!--                        <div class="category-icon"><img src="/images/icon/8.png" alt="images" class="img-fluid"></div>-->
-<!--                        <span class="category-title">Medical/Pharma</span>-->
-<!--                        <span class="category-quantity">(76212)</span>-->
-<!--                    </a>-->
-<!--                </li>-->
-<!--                <li class="category-item">-->
-<!--                    <a href="#">-->
-<!--                        <div class="category-icon"><img src="/images/icon/9.png" alt="images" class="img-fluid"></div>-->
-<!--                        <span class="category-title">Music & Arts</span>-->
-<!--                        <span class="category-quantity">(212)</span>-->
-<!--                    </a>-->
-<!--                </li>-->
-<!--                <li class="category-item">-->
-<!--                    <a href="#">-->
-<!--                        <div class="category-icon"><img src="/images/icon/10.png" alt="images" class="img-fluid"></div>-->
-<!--                        <span class="category-title">Marketing/Sales</span>-->
-<!--                        <span class="category-quantity">(1298)</span>-->
-<!--                    </a>-->
-<!--                </li>-->
-<!--                <li class="category-item">-->
-<!--                    <a href="#">-->
-<!--                        <div class="category-icon"><img src="/images/icon/11.png" alt="images" class="img-fluid"></div>-->
-<!--                        <span class="category-title">Production/Operation</span>-->
-<!--                        <span class="category-quantity">(124)</span>-->
-<!--                    </a>-->
-<!--                </li>-->
-<!--                <li class="category-item">-->
-<!--                    <a href="#">-->
-<!--                        <div class="category-icon"><img src="/images/icon/12.png" alt="images" class="img-fluid"></div>-->
-<!--                        <span class="category-title">Miscellaneous</span>-->
-<!--                        <span class="category-quantity">(972)</span>-->
-<!--                    </a>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </div>-->
+
+
+
         <div class="section latest-jobs-ads">
             <div class="section-title tab-manu">
                 <h4>Latest Jobs</h4>
             </div>
-            <div th:each="job:${jobPage.content}">
-                <table>
-                    <tr>
-                        <th>company</th>
-                        <th>city</th>
-                        <th>JobType</th>
-                        <th>salary</th>
-                        <th>name</th>
-                    </tr>
-                    <tr>
-                        <td th:text="${job.company.name}"></td>
-                        <td th:text="${job.company.city}"></td>
-                        <td th:text="${job.jobType.name}"></td>
-                        <td th:text="${job.salary}"></td>
-                        <td th:text="${job.name}"></td>
-                    </tr>
 
-                </table>
+            <div class="page" >
+                <div class="container">
+                    <div class="section company-items job-company-items  text-center">
+                        <ul class="company-list">
 
+                            <a href="#">
+                                <a href="/job/jobDetails"></a>
+                                <a th:each="job:${jobPage.content}">
+                                    <li class="company-item">
+                                        <div class="category-icon"><img th:if="${job.company.picUrl!=null}" th:src="@{/getCompanyPic(picName=${job.company.picUrl})}" alt="images" class="img-fluid"></div>
+                                        <span class="category-title" th:text="${job.name}"></span>
+                                    </li>
+                                </a>
+                            </a>
+
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div th:if="${jobPage.totalPages>0}" class="pagination"
-                 th:each="pageNumber:${pageNumbers}">
-                <a th:href="@{/(size=${jobPage.size},page=${pageNumber - 1})}"
-                   th:text="${pageNumber}"
-                   th:class="${pageNumber==jobPage.number + 1} ?active"></a>
-
-            </div>
+        </div>
 
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade in" id="hot-jobs">
                     <div th:each="job:${jobPage.content}" class="job-ad-item">
-<!--                        <div class="item-info">-->
-<!--                            <div class="item-image-box">-->
-<!--                                <div class="item-image">-->
+                        <div class="item-info">
+                            <div class="item-image-box">
+                                <div class="item-image">
 
-<!--                                    <a th:href="@{'/job/details/' + ${job.id}}"><img-->
-<!--                                            th:if="${job.company.picUrl != null && !job.company.picUrl .isEmpty()}"-->
-<!--                                            th:src="@{/getCompanyImage(picUrl=${job.company.picUrl})}" alt="Image"-->
-<!--                                            class="img-fluid">-->
+                                    <a th:href="@{'/job/details/' + ${job.id}}"><img
+                                            th:if="${job.company.picUrl != null && !job.company.picUrl .isEmpty()}"
+                                            th:src="@{/getCompanyImage(picUrl=${job.company.picUrl})}" alt="Image"
+                                            class="img-fluid">
 <!--                                        <img th:if="${job.company.picUrl == null || job.company.picUrl .isEmpty()}"-->
 <!--                                            th:src="/images/job/3.png" alt="Image"-->
 <!--                                             class="img-fluid">-->
-<!--                                    </a>-->
-<!--                                </div>-->
-<!--                            </div>-->
+                                    </a>
+                                </div>
+                            </div>
                             <div class="ad-info">
-<!--                            <span><a th:href="@{'/job/details/' + ${job.id}}" class=title-->
-<!--                                     th:text="${job.company.name}"></a></span>-->
-                                <div class="ad-meta">
+                            <span><a th:href="@{'/job/details/' + ${job.id}}" class=title
+                                     th:text="${job.company.name}"></a></span>
+
+<!--                                <div th:each="job:${jobPage.content}">-->
+<!--                                    <table>-->
+<!--                                        <tr>-->
+<!--                                            <th>company</th>-->
+<!--                                            <th>city</th>-->
+<!--                                            <th>JobType</th>-->
+<!--                                            <th>salary</th>-->
+<!--                                            <th>name</th>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td th:text="${job.company.name}"></td>-->
+<!--                                            <td th:text="${job.company.city}"></td>-->
+<!--                                            <td th:text="${job.jobType.name}"></td>-->
+<!--                                            <td th:text="${job.salary}"></td>-->
+<!--                                            <td th:text="${job.name}"></td>-->
+<!--                                        </tr>-->
+
+<!--                                    </table>-->
+
+                                    <div class="ad-meta">
                                     <ul>
                                         <li><i class="fa fa-map-marker" aria-hidden="true"
                                                th:text="${job.company.name}"></i></li>
@@ -227,6 +152,15 @@
                             <div class="button">
                                 <a href="#" class="btn btn-primary">Apply Now</a>
                             </div>
+
+                        </div>
+                        <div th:if="${jobPage.totalPages>0}" class="pagination"
+                             th:each="pageNumber:${pageNumbers}">
+                            <a th:href="@{/(size=${jobPage.size},page=${pageNumber - 1})}"
+                               th:text="${pageNumber}"
+                               th:class="${pageNumber==jobPage.number + 1} ?active"></a>
+
+                        </div>
 
                         </div>
 
