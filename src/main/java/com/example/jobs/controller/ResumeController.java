@@ -22,7 +22,7 @@ import java.io.InputStream;
 @RequiredArgsConstructor
 public class ResumeController {
 
-    private final ResumeRepository resumeRepository;
+
     private final ResumeService resumeService;
     @Value("${images.upload.path}")
     public String imagePath;
@@ -32,8 +32,10 @@ public class ResumeController {
     @GetMapping("/resume")
     public String resumePage(ModelMap map, @ModelAttribute CurrentUser currentUser) {
         Resume resume = resumeService.findByUserId(currentUser.getUser().getId());
+        
         if (resume != null) {
             map.addAttribute("resume", resume);
+
         }
         return "resume";
     }

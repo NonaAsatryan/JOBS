@@ -23,4 +23,8 @@ public class Company {
     private String address;
     private String email;
     private String mobileNumber;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User user;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Category category;
 }
