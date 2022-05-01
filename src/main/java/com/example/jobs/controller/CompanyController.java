@@ -74,11 +74,11 @@ public class CompanyController {
         }
     }
 
-    @GetMapping("/company/search/{id}")
-    public String searchCompany(@PathVariable("id") int id) {
-        companyService.findById(id);
-        return "job-list";
-
-    }
+//    @GetMapping("/company/search/{id}")
+//    public String searchCompany(@PathVariable("id") int id) {
+//        companyService.findById(id);
+//        return "job-list";
+//
+//    }
 
 }
