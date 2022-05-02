@@ -1,6 +1,7 @@
 package com.example.jobs.controller;
 
 import com.example.jobs.dto.CreateCompanyRequest;
+import com.example.jobs.entity.Category;
 import com.example.jobs.entity.Company;
 import com.example.jobs.sequrity.CurrentUser;
 import com.example.jobs.service.CategoryService;
@@ -54,7 +55,7 @@ public class CompanyController {
     @GetMapping("/company")
     public String companyPage(@ModelAttribute Company company,
                               @ModelAttribute CurrentUser currentUser, ModelMap map) {
-        List<Company> companies = companyService.findAll();
+        List<Company> companies = companyService.findByUserId(currentUser.getUser().getId());
         map.addAttribute("companies", companies);
         return "company";
     }
@@ -62,7 +63,8 @@ public class CompanyController {
     @PostMapping("/company/save")
     public String addCompany(@ModelAttribute @Valid CreateCompanyRequest createCompanyRequest,
                              BindingResult bindingResult,
-                             @ModelAttribute CurrentUser currentUser,ModelMap map) {
+                             @ModelAttribute CurrentUser currentUser,
+                             @ModelAttribute Category category, ModelMap map) {
 
         if (bindingResult.hasErrors()) {
             List<String> errors = new ArrayList<>();
@@ -70,11 +72,11 @@ public class CompanyController {
                 errors.add(allError.getDefaultMessage());
             }
             map.addAttribute("errors", errors);
-//            map.addAttribute("categories", categoryService.findAll());
+            map.addAttribute("categories", categoryService.findAll());
             return "employer-profile";
         } else {
             Company company = mapper.map(createCompanyRequest, Company.class);
-            companyService.add(company);
+            companyService.add(company,currentUser.getUser());
 
             return "redirect:/company";
         }

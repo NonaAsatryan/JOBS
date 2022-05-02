@@ -24,5 +24,9 @@ public class Company {
     private String email;
     private String mobileNumber;
     private String picUrl;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User user;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Category category;
 
 }
