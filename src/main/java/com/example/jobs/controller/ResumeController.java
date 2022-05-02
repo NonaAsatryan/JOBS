@@ -22,7 +22,6 @@ import java.io.InputStream;
 @RequiredArgsConstructor
 public class ResumeController {
 
-    private final ResumeRepository resumeRepository;
     private final ResumeService resumeService;
     @Value("${images.upload.path}")
     public String imagePath;

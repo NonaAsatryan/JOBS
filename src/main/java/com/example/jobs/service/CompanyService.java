@@ -1,5 +1,6 @@
 package com.example.jobs.service;
 
+import com.example.jobs.entity.Category;
 import com.example.jobs.entity.Company;
 import com.example.jobs.entity.User;
 import com.example.jobs.repository.CompanyRepository;
@@ -17,17 +18,20 @@ public class CompanyService {
         return companyRepository.findAll();
 
     }
-//    public List<Company> findAllByUser(User user) {
-//        return companyRepository.findAllByUser(user);
-//    }
+    public List<Company> findByUserId(int id) {
+        return companyRepository.findByUser_Id(id);
+    }
 
-    public void deleteById(int id) {
+    public Company deleteById(int id) {
         companyRepository.deleteById(id);
+        return null;
 
     }
-    public Company add(Company company) {
-
-        return companyRepository.save(company);
+    public Company add(Company company, User user) {
+        company.setUser(user);
+//        company.setCategory(category);
+        companyRepository.save(company);
+        return company;
     }
     public void save(Company company) {
         companyRepository.save(company);
@@ -40,6 +44,7 @@ public class CompanyService {
     public Optional<Company> findById(int id){
         return companyRepository.findById(id);
     }
+
 
 
 }
