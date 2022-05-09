@@ -1,5 +1,6 @@
 package com.example.jobs.controller;
 
+import com.example.jobs.dto.University;
 import com.example.jobs.entity.Resume;
 import com.example.jobs.repository.ResumeRepository;
 import com.example.jobs.sequrity.CurrentUser;
@@ -8,21 +9,24 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class ResumeController {
 
     private final ResumeService resumeService;
+    private final RestTemplate restTemplate;
     @Value("${images.upload.path}")
     public String imagePath;
     @Value("${files.upload.path}")
@@ -50,6 +54,16 @@ public class ResumeController {
                              ModelMap map) throws IOException {
         map.addAttribute("resume", resume);
         map.addAttribute("currentUser", currentUser);
+//        University[] forEntity = restTemplate.getForEntity("http://universities.hipolabs.com/search?country=Armenia", University[].class);
+//        University[] universities = forEntity.getBody();
+//        List<University> universityList = Arrays.asList(universities);
+//        for (University university : universities) {
+//            System.out.println(university);
+//        map.addAttribute("universities", universities);
+
+//        }
+//        return modelMapper.map(userRepository.getById(id), UserResponseDto.class);
+//    }
         resumeService.addResume(resume, uploadedImageFile, uploadedFile, currentUser.getUser());
 
         return "resume";
