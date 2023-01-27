@@ -96,14 +96,6 @@ class JobServiceTest {
         assertEquals("Unable to find com.example.jobs.entity.Category with id 1; nested exception is javax.persistence.EntityNotFoundException: Unable to find com.example.jobs.entity.Category with id 1",
                 thrown.getMessage());
     }
-//    @Test
-//    void save_nn() {
-//        Job job = mapper.map(createJobRequest, Job.class);
-//        Mockito.when(categoryRepository.getById(1)).thenReturn(category);
-//        Mockito.when(companyRepository.getById(1)).thenReturn(company);
-//            jobService.save(job, user, 1, 1);
-//            assertEquals("developer",job.getName());
-//    }
 
     @Test
     void save_job() {

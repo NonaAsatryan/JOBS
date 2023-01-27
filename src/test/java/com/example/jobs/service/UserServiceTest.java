@@ -27,7 +27,7 @@ class UserServiceTest {
     private User user;
 
     @BeforeEach
-    void beforeAllUsr() {
+    void beforeAll() {
         user = new User();
         user.setName("poxos");
         user.setSurname("poxosyan");
