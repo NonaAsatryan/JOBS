@@ -47,9 +47,7 @@ public class CompanyController {
         map.addAttribute("company", companyService.getById(id));
 
         return "employer-profile";
-
     }
-
     @GetMapping("/company")
     public String companyPage(@ModelAttribute Company company,
                               @ModelAttribute CurrentUser currentUser, ModelMap map) {
