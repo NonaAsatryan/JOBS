@@ -24,12 +24,10 @@ public class CategoryController {
     @Value("${images.upload.path}")
     public String imagePath;
 
-
     @GetMapping("/category/delete/{id}")
     public String deleteCategory(@PathVariable("id") int id) {
         categoryService.deleteById(id);
         return "redirect:/category";
-
     }
 
     @GetMapping("/category/edit/{id}")
