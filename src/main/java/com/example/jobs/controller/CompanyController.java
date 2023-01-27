@@ -40,9 +40,7 @@ public class CompanyController {
     public String deleteCompany(@PathVariable("id") int id) {
         companyService.deleteById(id);
         return "redirect:/company";
-
     }
-
     @GetMapping("/company/edit/{id}")
     public String editCompanyPage(ModelMap map,
                                   @PathVariable("id") int id) {
